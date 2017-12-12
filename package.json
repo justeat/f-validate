@@ -22,8 +22,11 @@
     "@justeat/gulp-build-fozzie": "^6.5.0",
     "babel-preset-es2015": "^6.24.1"
   },
+  "devDependencies": {
+    "danger": "1.2.0"
+  },
   "keywords": [
-    "fozzie",
+    "fozzie"
   ],
   "scripts": {
     "prestart": "yarn test",
