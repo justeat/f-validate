@@ -1008,13 +1008,13 @@ describe('validation rules', () => {
 
     });
 
-    describe('requiredIfOtherInputChecked', () => {
+    describe('requiredIfOtherInputNotchecked', () => {
 
         it('should return valid if dependent input is not checked, and current field is not empty', () => {
 
             // Arrange
             TestUtils.setBodyHtml(`<form>
-                <input data-val-required-if-other-input-checked="nameOfcheckedInput" value="test" />
+                <input data-val-required-if-other-input-not-checked="nameOfcheckedInput" value="test" />
                 <input type="checkbox" name="nameOfcheckedInput" />
                 </form>`);
             const form = document.querySelector('form');
@@ -1032,7 +1032,7 @@ describe('validation rules', () => {
 
             // Arrange
             TestUtils.setBodyHtml(`<form>
-                <input data-val-required-if-other-input-checked="nameOfcheckedInput" value="" />
+                <input data-val-required-if-other-input-not-checked="nameOfcheckedInput" value="" />
                 <input type="checkbox" name="nameOfcheckedInput" />
                 </form>`);
             const form = document.querySelector('form');
@@ -1050,7 +1050,7 @@ describe('validation rules', () => {
 
             // Arrange
             TestUtils.setBodyHtml(`<form>
-                <input data-val-required-if-other-input-checked="nameOfcheckedInput" value="test" />
+                <input data-val-required-if-other-input-not-checked="nameOfcheckedInput" value="test" />
                 <input type="checkbox" name="nameOfcheckedInput" checked />
                 </form>`);
             const form = document.querySelector('form');
@@ -1068,7 +1068,7 @@ describe('validation rules', () => {
 
             // Arrange
             TestUtils.setBodyHtml(`<form>
-                <input data-val-required-if-other-input-checked="nameOfcheckedInput" value="" />
+                <input data-val-required-if-other-input-not-checked="nameOfcheckedInput" value="" />
                 <input type="checkbox" name="nameOfcheckedInput" checked />
                 </form>`);
             const form = document.querySelector('form');
@@ -1086,7 +1086,7 @@ describe('validation rules', () => {
 
             // Arrange
             TestUtils.setBodyHtml(`<form>
-                <input data-val-required-if-other-input-checked="nameOfcheckedInput" value="" />
+                <input data-val-required-if-other-input-not-checked="nameOfcheckedInput" value="" />
                 </form>`);
             const form = document.querySelector('form');
 

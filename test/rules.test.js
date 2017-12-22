@@ -38,9 +38,9 @@ describe('rule definitions', () => {
 
     });
 
-    it('requiredIfOtherInputChecked rule should exist', () => {
+    it('requiredIfOtherInputNotchecked rule should exist', () => {
 
-        expect(testDefinitions).toHaveProperty('requiredIfOtherInputChecked');
+        expect(testDefinitions).toHaveProperty('requiredIfOtherInputNotchecked');
 
     });
 
