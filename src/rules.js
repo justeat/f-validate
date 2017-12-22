@@ -51,6 +51,15 @@ const testDefinitions = {
                 && field.value === document.querySelector(`input[name=${matchedFieldName}]`).value;
         }
     },
+    requiredIfOtherInputChecked: {
+        condition: field => field.hasAttribute('data-val-required-if-other-input-checked'),
+        test: field => {
+            const input = document.querySelector(`[name='${field.getAttribute('data-val-required-if-other-input-checked')}']`);
+            const isChecked = input ? input.checked : true;
+
+            return isChecked || (!isChecked && field.value.length > 0);
+        }
+    },
     custom: {
         condition: field => {
             const hasCustom = field.hasAttribute('data-val-custom'),

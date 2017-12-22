@@ -38,6 +38,12 @@ describe('rule definitions', () => {
 
     });
 
+    it('requiredIfOtherInputChecked rule should exist', () => {
+
+        expect(testDefinitions).toHaveProperty('requiredIfOtherInputChecked');
+
+    });
+
     it('custom rule should exist', () => {
 
         expect(testDefinitions).toHaveProperty('custom');

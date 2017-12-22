@@ -1008,6 +1008,99 @@ describe('validation rules', () => {
 
     });
 
+    describe('requiredIfOtherInputChecked', () => {
+
+        it('should return valid if dependent input is not checked, and current field is not empty', () => {
+
+            // Arrange
+            TestUtils.setBodyHtml(`<form>
+                <input data-val-required-if-other-input-checked="nameOfcheckedInput" value="test" />
+                <input type="checkbox" name="nameOfcheckedInput" />
+                </form>`);
+            const form = document.querySelector('form');
+
+            // Act
+            const validateForm = new FormValidation(form);
+            const isFormValid = validateForm.isValid();
+
+            // Assert
+            expect(isFormValid).toBe(true);
+
+        });
+
+        it('should return invalid if dependent input is not checked, and current field is empty', () => {
+
+            // Arrange
+            TestUtils.setBodyHtml(`<form>
+                <input data-val-required-if-other-input-checked="nameOfcheckedInput" value="" />
+                <input type="checkbox" name="nameOfcheckedInput" />
+                </form>`);
+            const form = document.querySelector('form');
+
+            // Act
+            const validateForm = new FormValidation(form);
+            const isFormValid = validateForm.isValid();
+
+            // Assert
+            expect(isFormValid).toBe(false);
+
+        });
+
+        it('should return valid if dependent input is checked, and current field is not empty', () => {
+
+            // Arrange
+            TestUtils.setBodyHtml(`<form>
+                <input data-val-required-if-other-input-checked="nameOfcheckedInput" value="test" />
+                <input type="checkbox" name="nameOfcheckedInput" checked />
+                </form>`);
+            const form = document.querySelector('form');
+
+            // Act
+            const validateForm = new FormValidation(form);
+            const isFormValid = validateForm.isValid();
+
+            // Assert
+            expect(isFormValid).toBe(true);
+
+        });
+
+        it('should return valid if dependent input is checked, and current field is empty', () => {
+
+            // Arrange
+            TestUtils.setBodyHtml(`<form>
+                <input data-val-required-if-other-input-checked="nameOfcheckedInput" value="" />
+                <input type="checkbox" name="nameOfcheckedInput" checked />
+                </form>`);
+            const form = document.querySelector('form');
+
+            // Act
+            const validateForm = new FormValidation(form);
+            const isFormValid = validateForm.isValid();
+
+            // Assert
+            expect(isFormValid).toBe(true);
+
+        });
+
+        it('should return valid if dependent input is not found', () => {
+
+            // Arrange
+            TestUtils.setBodyHtml(`<form>
+                <input data-val-required-if-other-input-checked="nameOfcheckedInput" value="" />
+                </form>`);
+            const form = document.querySelector('form');
+
+            // Act
+            const validateForm = new FormValidation(form);
+            const isFormValid = validateForm.isValid();
+
+            // Assert
+            expect(isFormValid).toBe(true);
+
+        });
+
+    });
+
     describe('custom', () => {
 
         it('should return valid for a field custom attribute, where method returns true', () => {
