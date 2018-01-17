@@ -1,5 +1,131 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`error messages custom should apply error class to invalid field 1`] = `
+"<form class=\\"has-error\\">
+                                    <input required=\\"\\" data-required-error=\\"custom required error message\\" class=\\"has-error\\"><p class=\\"form-error\\">custom required error message</p>
+                                </form>"
+`;
+
+exports[`error messages custom should not apply error class to valid field 1`] = `
+"<form class=\\"has-success\\">
+                                    <input required=\\"\\" value=\\"x\\" data-required-error=\\"custom required error message\\" class=\\"has-success\\">
+                                </form>"
+`;
+
+exports[`error messages custom should remove error message if field is now valid 1`] = `
+"<form class=\\"has-error\\">
+                                        <input required=\\"\\" data-required-error=\\"custom required error message\\" class=\\"has-error\\"><p class=\\"form-error\\">custom required error message</p>
+                                    </form>"
+`;
+
+exports[`error messages custom should remove error message if field is now valid 2`] = `
+"<form class=\\"has-success\\">
+                                        <input required=\\"\\" data-required-error="custom required error message" class=\\"has-success\\">
+                                    </form>"
+`;
+
+exports[`error messages custom should replace existing error message with new 1`] = `
+"<form class=\\"has-error\\">
+                                    <input required=\\"\\" maxlength=\\"3\\" data-required-error=\\"custom required error message\\" data-maxlength-error=\\"custom maxlength error message\\" class=\\"has-error\\"><p class=\\"form-error\\">custom required error message</p>
+                                </form>"
+`;
+
+exports[`error messages custom should replace existing error message with new 2`] = `
+"<form class=\\"has-error\\">
+                                    <input required=\\"\\" maxlength=\\"3\\" data-required-error=\\"custom required error message\\" data-maxlength-error=\\"custom maxlength error message\\" class=\\"has-error\\"><p class=\\"form-error\\">custom maxlength error message</p>
+                                </form>"
+`;
+
+exports[`error messages default should apply error class to invalid field 1`] = `
+"<form class=\\"has-error\\">
+                                    <input required=\\"\\" class=\\"has-error\\"><p class=\\"form-error\\">This field is required.</p>
+                                </form>"
+`;
+
+exports[`error messages default should not apply error class to valid field 1`] = `
+"<form class=\\"has-success\\">
+                                    <input required=\\"\\" value=\\"x\\" class=\\"has-success\\">
+                                </form>"
+`;
+
+exports[`error messages default should remove error message if field is now valid 1`] = `
+"<form class=\\"has-error\\">
+                                        <input required=\\"\\" class=\\"has-error\\"><p class=\\"form-error\\"></p>
+                                    </form>"
+`;
+
+exports[`error messages default should remove error message if field is now valid 2`] = `
+"<form class=\\"has-success\\">
+                                        <input required=\\"\\" value=\\"x\\" class=\\"has-success\\">
+                                    </form>"
+`;
+
+exports[`error messages default should replace existing error message with new 1`] = `
+"<form class=\\"has-error\\">
+                                    <input required=\\"\\" maxlength=\\"3\\" class=\\"has-error\\"><p class=\\"form-error\\"></p>
+                                </form>"
+`;
+
+exports[`error messages default should replace existing error message with new 2`] = `
+"<form class=\\"has-error\\">
+                                    <input required=\\"\\" maxlength=\\"3\\" class=\\"has-error\\"><p class=\\"form-error\\"></p>
+                                </form>"
+`;
+
+exports[`error messages grouped should apply error class only once within group 1`] = `
+"<form class=\\"has-error\\">
+                                    <div class=\\"form-group\\">
+                                        <input required=\\"\\" class=\\"has-error\\">
+                                        <input required=\\"\\" minlength=\\"2\\" value=\\"x\\" class=\\"has-error\\"><p class=\\"form-error\\">This field is required.</p>
+                                    </div>
+                                </form>"
+`;
+
+exports[`error messages grouped should not apply error class to valid group 1`] = `
+"<form class=\\"has-success\\">
+                                    <div class=\\"form-group\\">
+                                        <input required=\\"\\" value=\\"x\\" class=\\"has-success\\">
+                                        <input required=\\"\\" minlength=\\"2\\" value=\\"xx\\" class=\\"has-success\\">
+                                    </div>
+                                </form>"
+`;
+
+exports[`error messages grouped should remove existing group error message if group is now valid 1`] = `
+"<form class=\\"has-error\\">
+                                    <div class=\\"form-group\\">
+                                        <input required=\\"\\" class=\\"has-error\\">
+                                        <input required=\\"\\" minlength=\\"2\\" class=\\"has-error\\"><p class=\\"form-error\\"></p>
+                                    </div>
+                                </form>"
+`;
+
+exports[`error messages grouped should remove existing group error message if group is now valid 2`] = `
+"<form class=\\"has-success\\">
+                                    <div class=\\"form-group\\">
+                                        <input required=\\"\\" class=\\"has-success\\">
+                                        <input required=\\"\\" minlength=\\"2\\" class=\\"has-success\\">
+                                    </div>
+                                </form>"
+`;
+
+exports[`error messages grouped should replace existing group error message with new message 1`] = `
+"<form class=\\"has-error\\">
+                                    <div class=\\"form-group\\">
+                                        <input required=\\"\\" class=\\"has-error\\">
+                                        <input required=\\"\\" minlength=\\"2\\" class=\\"has-error\\"><p class=\\"form-error\\">This field is required.</p>
+                                    </div>
+                                </form>"
+`;
+
+exports[`error messages grouped should replace existing group error message with new message 2`] = `
+"<form class=\\"has-error\\">
+                                    <div class=\\"form-group\\">
+                                        <input required=\\"\\" class=\\"has-success\\">
+                                        <input required=\\"\\" minlength=\\"2\\" class=\\"has-error\\"><p class=\\"form-error\\">This field must be at least %s characters in length.</p>
+                                    </div>
+                                </form>"
+`;
+
 exports[`error states should apply correct classes to multiple types of field 1`] = `
 "<form class=\\"has-error\\">
                                         <input required=\\"\\" value=\\"x\\" class=\\"has-success\\">

@@ -10,5 +10,7 @@ export default {
 
         return field.value.trim().length >= parseInt(field.getAttribute('minlength')
             || field.getAttribute('data-val-minlength'), 10);
-    }
+    },
+
+    defaultMessage: 'This field must be at least %s characters in length.'
 };
