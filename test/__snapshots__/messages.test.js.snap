@@ -24,13 +24,13 @@ exports[`error messages custom should not apply error class to valid field 1`] =
                                 </form>"
 `;
 
-exports[`error messages custom should replace existing error message with new 1`] = `
+exports[`error messages custom should replace existing error message 1`] = `
 "<form class=\\"has-error\\">
                                     <input required=\\"\\" maxlength=\\"3\\" data-required-error=\\"custom required error message\\" data-maxlength-error=\\"custom maxlength error message\\" class=\\"has-error\\"><p class=\\"form-error\\">custom maxlength error message</p>
                                 </form>"
 `;
 
-exports[`error messages custom should replace existing error message with new 2`] = `
+exports[`error messages custom should replace existing error message 2`] = `
 "<form class=\\"has-error\\">
                                     <input required=\\"\\" maxlength=\\"3\\" data-required-error=\\"custom required error message\\" data-maxlength-error=\\"custom maxlength error message\\" class=\\"has-error\\"><p class=\\"form-error\\">custom maxlength error message</p>
                                 </form>"
@@ -60,13 +60,13 @@ exports[`error messages default should not apply error class to valid field 1`] 
                                 </form>"
 `;
 
-exports[`error messages default should replace existing error message with new 1`] = `
+exports[`error messages default should replace existing error message 1`] = `
 "<form class=\\"has-error\\">
                                     <input required=\\"\\" maxlength=\\"3\\" class=\\"has-error\\"><p class=\\"form-error\\">This field must not exceed %s characters in length.</p>
                                 </form>"
 `;
 
-exports[`error messages default should replace existing error message with new 2`] = `
+exports[`error messages default should replace existing error message 2`] = `
 "<form class=\\"has-error\\">
                                     <input required=\\"\\" maxlength=\\"3\\" class=\\"has-error\\"><p class=\\"form-error\\">This field must not exceed %s characters in length.</p>
                                 </form>"

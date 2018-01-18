@@ -1,7 +1,8 @@
 import testDefinitions from './rules';
 import { addCallBack, runCallbacks } from './callbacks';
+import updateErrorMessages from './messages';
 
-const FIELD_VALUES = 'input, select, textarea';
+const FIELD_VALUES = 'input, select, textarea, .form-group';
 const VALIDATION_KEYS = Object.keys(testDefinitions);
 
 export const defaultOptions = {
@@ -91,8 +92,8 @@ export default class FormValidation {
             // This prevents us from applying state classes to fields without rules
             let fieldHasValidation = false;
 
-            VALIDATION_KEYS.forEach(key => {
-                const definition = testDefinitions[key];
+            VALIDATION_KEYS.forEach(ruleName => {
+                const definition = testDefinitions[ruleName];
 
                 if (field.getAttribute('data-val-custom')) {
                     testDefinitions.custom.test = this.customHandlers[field.getAttribute('data-val-custom')];
@@ -103,6 +104,7 @@ export default class FormValidation {
                     if (!definition.test(field)) {
                         fieldValid = false;
                     }
+                    updateErrorMessages(ruleName, field, fieldValid);
                 }
 
             });
@@ -155,5 +157,3 @@ export default class FormValidation {
     }
 
 }
-
-

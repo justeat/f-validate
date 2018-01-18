@@ -41,16 +41,16 @@ describe('error messages', () => {
 
         });
 
-        it('should replace existing error message with new', () => {
+        it('should replace existing error message', () => {
 
             // Arrange
             TestUtils.setBodyHtml(`<form>
-                                    <input 
-                                        required 
-                                        maxlength="3" 
+                                    <input
+                                        required
+                                        maxlength="3"
                                         data-required-error="custom required error message"
                                         data-maxlength-error="custom maxlength error message"
-                                    /> 
+                                    />
                                 </form>`);
             const form = document.querySelector('form');
             const input = form.querySelector('input');
@@ -131,7 +131,7 @@ describe('error messages', () => {
 
         });
 
-        it('should replace existing error message with new', () => {
+        it('should replace existing error message', () => {
 
             // Arrange
             TestUtils.setBodyHtml(`<form>
