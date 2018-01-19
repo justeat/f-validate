@@ -1,9 +1,10 @@
 import testDefinitions from './rules';
+import CONSTANTS from './constants';
 
 export const getInlineErrorElement = field => {
     const nextSibling = field.nextElementSibling;
 
-    if (nextSibling && nextSibling.classList.contains('form-error')) {
+    if (nextSibling && nextSibling.classList.contains(CONSTANTS.cssClasses.formError)) {
 
         return nextSibling;
     }
@@ -17,12 +18,12 @@ export const displayInlineMessage = (errorElement, customMessage, field) => {
 
     if (!errorElement) {
         updateElement = document.createElement('p');
-        updateElement.classList.add('form-error');
+        updateElement.classList.add(CONSTANTS.cssClasses.formError);
         field.parentNode.insertBefore(updateElement, field.nextSibling);
     }
 
     updateElement.textContent = customMessage;
-    updateElement.classList.remove('is-hidden');
+    updateElement.classList.remove(CONSTANTS.cssClasses.isHidden);
 
 };
 
@@ -31,7 +32,7 @@ export const hideMessage = errorElement => {
         return;
     }
 
-    errorElement.classList.add('is-hidden');
+    errorElement.classList.add(CONSTANTS.cssClasses.isHidden);
     errorElement.innerHTML = '';
 
 };

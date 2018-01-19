@@ -1,13 +1,13 @@
 import testDefinitions from './rules';
 import { addCallBack, runCallbacks } from './callbacks';
 import { getInlineErrorElement, displayInlineMessage, hideMessage, getMessage } from './messages';
+import CONSTANTS from './constants';
 
-const FIELD_VALUES = 'input, select, textarea, .form-group';
 const VALIDATION_KEYS = Object.keys(testDefinitions);
 
 export const defaultOptions = {
-    errorClass: 'has-error',
-    successClass: 'has-success',
+    errorClass: CONSTANTS.cssClasses.hasError,
+    successClass: CONSTANTS.cssClasses.hasSuccess,
     focus: false,
     groupErrors: false,
     groupErrorsAtTop: false,
@@ -177,7 +177,7 @@ export default class FormValidation {
 
     getFields () {
         return Array
-            .from(this.form.querySelectorAll(FIELD_VALUES))
+            .from(this.form.querySelectorAll(CONSTANTS.fieldValues))
             .filter(f => !(f.hasAttribute('type')
                 && f.getAttribute('type') === 'hidden')
                 && !f.hasAttribute('disabled')
@@ -185,7 +185,7 @@ export default class FormValidation {
     }
 
     getGroupedErrorElement () {
-        const groupedErrorElement = this.form.querySelector('.form-errors');
+        const groupedErrorElement = this.form.querySelector(`.${CONSTANTS.cssClasses.formErrors}`);
 
         if (groupedErrorElement !== null) {
 
@@ -201,7 +201,7 @@ export default class FormValidation {
 
         if (!groupedErrorElement) {
             updateElement = document.createElement('ul');
-            updateElement.classList.add('form-errors');
+            updateElement.classList.add(CONSTANTS.cssClasses.formErrors);
 
             const placeAboveThisElement = this.form.querySelector(this.options.submitButtonId) || this.form.lastChild;
             const relativeElement = this.options.groupErrorsAtTop ? this.form.firstChild : placeAboveThisElement;
