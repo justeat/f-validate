@@ -1,6 +1,6 @@
 import testDefinitions from './rules';
 import { addCallBack, runCallbacks } from './callbacks';
-import updateErrorMessages from './messages';
+import { getInlineErrorElement, displayInlineMessage, hideMessage, getMessage } from './messages';
 
 const FIELD_VALUES = 'input, select, textarea, .form-group';
 const VALIDATION_KEYS = Object.keys(testDefinitions);
@@ -8,7 +8,10 @@ const VALIDATION_KEYS = Object.keys(testDefinitions);
 export const defaultOptions = {
     errorClass: 'has-error',
     successClass: 'has-success',
-    focus: false
+    focus: false,
+    groupErrors: false,
+    groupErrorsAtTop: false,
+    positionElementId: '[type="submit"]'
 };
 
 const getForm = descriptor => {
@@ -43,6 +46,7 @@ export default class FormValidation {
         if (this.options.onError) {
             this.on('error', this.options.onError);
         }
+        this.errorMessages = [];
     }
 
     /**
@@ -83,8 +87,11 @@ export default class FormValidation {
     isValid (event) {
 
         let formValid = true;
+        this.errorMessages = [];
 
         this.fields.forEach(field => {
+
+            let customMessage = '';
 
             // This needs to be set outside of the forEach loop, as otherwise only the final rule will apply the state
             let fieldValid = true;
@@ -103,19 +110,31 @@ export default class FormValidation {
                     fieldHasValidation = true;
                     if (!definition.test(field)) {
                         fieldValid = false;
+                        customMessage = getMessage(field, ruleName);
+                        this.errorMessages.push(customMessage);
                     }
-                    updateErrorMessages(ruleName, field, fieldValid);
                 }
 
             });
 
             if (fieldHasValidation) {
+
                 if (fieldValid) {
                     this.setSuccess(field);
                 } else {
                     formValid = false;
                     this.setError(field);
                 }
+
+                if (!this.options.groupErrors) {
+                    const errorElement = getInlineErrorElement(field);
+                    if (fieldValid) {
+                        hideMessage(errorElement);
+                    } else {
+                        displayInlineMessage(errorElement, customMessage, field);
+                    }
+                }
+
             }
 
         });
@@ -130,6 +149,15 @@ export default class FormValidation {
         } else {
             this.setSuccess(this.form);
             runCallbacks(this.callBacks.success);
+        }
+
+        if (this.options.groupErrors) {
+            const groupedErrorElement = this.getGroupedErrorElement();
+            if (formValid) {
+                hideMessage(groupedErrorElement);
+            } else {
+                this.displayGroupedMessages(groupedErrorElement);
+            }
         }
 
         return formValid;
@@ -156,4 +184,37 @@ export default class FormValidation {
                 && !f.hasAttribute('data-novalidate'));
     }
 
+    getGroupedErrorElement () {
+        const groupedErrorElement = this.form.querySelector('.form-errors');
+
+        if (groupedErrorElement !== null) {
+
+            return groupedErrorElement;
+        }
+
+        return false;
+    }
+
+    displayGroupedMessages (groupedErrorElement) {
+
+        let updateElement = groupedErrorElement;
+
+        if (!groupedErrorElement) {
+            updateElement = document.createElement('ul');
+            updateElement.classList.add('form-errors');
+
+            const placeAboveThisElement = this.form.querySelector(this.options.submitButtonId) || this.form.lastChild;
+            const relativeElement = this.options.groupErrorsAtTop ? this.form.firstChild : placeAboveThisElement;
+            this.form.insertBefore(updateElement, relativeElement);
+
+        } else {
+            groupedErrorElement.innerHTML = '';
+        }
+
+        this.errorMessages.forEach(error => {
+            const li = document.createElement('li');
+            li.textContent = error;
+            updateElement.appendChild(li);
+        });
+    }
 }

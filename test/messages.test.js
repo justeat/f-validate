@@ -1,111 +1,53 @@
 import TestUtils from 'js-test-buddy';
-import FormValidation from '../src';
+import { getInlineErrorElement, displayInlineMessage, hideMessage, getMessage } from '../src/messages';
 
-describe('error messages', () => {
+describe('messages', () => {
 
-    describe('custom', () => {
+    describe('getInlineErrorElement', () => {
 
-        it('should apply error class to invalid field', () => {
+        it('should return error if element exists', () => {
 
             // Arrange
-            TestUtils.setBodyHtml(`<form>
-                                    <input required data-required-error="custom required error message" />
-                                </form>`);
-            const form = document.querySelector('form');
-            const validateForm = new FormValidation(form);
+            TestUtils.setBodyHtml('<input /><p class="form-error">error message</p>');
+            const input = document.querySelector('input');
+            const error = document.querySelector('p');
 
             // Act
-            validateForm.isValid();
+            const result = getInlineErrorElement(input);
 
             // Assert
-            const html = TestUtils.getBodyHtml();
-            expect(html).toMatchSnapshot();
+            expect(result).toEqual(error);
 
         });
 
-        it('should not apply error class to valid field', () => {
+        it('should return false if element does not exist', () => {
 
             // Arrange
-            TestUtils.setBodyHtml(`<form>
-                                    <input required value="x" data-required-error="custom required error message" />
-                                </form>`);
-            const form = document.querySelector('form');
-            const validateForm = new FormValidation(form);
+            TestUtils.setBodyHtml('<input />');
+            const input = document.querySelector('input');
 
             // Act
-            validateForm.isValid();
+            const result = getInlineErrorElement(input);
 
             // Assert
-            const html = TestUtils.getBodyHtml();
-            expect(html).toMatchSnapshot();
-
-        });
-
-        it('should replace existing error message', () => {
-
-            // Arrange
-            TestUtils.setBodyHtml(`<form>
-                                    <input
-                                        required
-                                        maxlength="3"
-                                        data-required-error="custom required error message"
-                                        data-maxlength-error="custom maxlength error message"
-                                    />
-                                </form>`);
-            const form = document.querySelector('form');
-            const input = form.querySelector('input');
-            const validateForm = new FormValidation(form);
-
-            // Act & Assert
-            validateForm.isValid();
-            expect(TestUtils.getBodyHtml()).toMatchSnapshot();
-
-            // Make input invalid due to maxlength exceeded
-            input.value = 'xxxx';
-
-            validateForm.isValid();
-            const html = TestUtils.getBodyHtml();
-            expect(html).toMatchSnapshot();
-
-        });
-
-        it('should hide error message if field is now valid', () => {
-
-            // Arrange
-            TestUtils.setBodyHtml(`<form>
-                                        <input required data-required-error="custom required error message" />
-                                    </form>`);
-            const form = document.querySelector('form');
-            const input = form.querySelector('input');
-            const validateForm = new FormValidation(form);
-
-            // Act & Assert
-            validateForm.isValid();
-            expect(TestUtils.getBodyHtml()).toMatchSnapshot();
-
-            // Make input valid
-            input.value = 'x';
-
-            validateForm.isValid();
-            expect(TestUtils.getBodyHtml()).toMatchSnapshot();
+            expect(result).toEqual(false);
 
         });
 
     });
 
-    describe('default', () => {
+    describe('displayInlineMessage', () => {
 
-        it('should apply error class to invalid field', () => {
+        it('should create a new element if it does not exist, and assign error', () => {
 
             // Arrange
-            TestUtils.setBodyHtml(`<form>
-                                    <input required />
-                                </form>`);
-            const form = document.querySelector('form');
-            const validateForm = new FormValidation(form);
+            TestUtils.setBodyHtml('<input />');
+            const input = document.querySelector('input');
+            const error = document.querySelector('p');
+            const customMessage = 'custom message';
 
             // Act
-            validateForm.isValid();
+            displayInlineMessage(error, customMessage, input);
 
             // Assert
             const html = TestUtils.getBodyHtml();
@@ -113,65 +55,18 @@ describe('error messages', () => {
 
         });
 
-        it('should not apply error class to valid field', () => {
+        it('should assign error to existing element', () => {
 
             // Arrange
-            TestUtils.setBodyHtml(`<form>
-                                    <input required value="x" />
-                                </form>`);
-            const form = document.querySelector('form');
-            const validateForm = new FormValidation(form);
+            TestUtils.setBodyHtml('<input /><p class="form-error">error message</p>');
+            const input = document.querySelector('input');
+            const error = document.querySelector('p');
+            const customMessage = 'custom message';
 
             // Act
-            validateForm.isValid();
+            displayInlineMessage(error, customMessage, input);
 
             // Assert
-            const html = TestUtils.getBodyHtml();
-            expect(html).toMatchSnapshot();
-
-        });
-
-        it('should replace existing error message', () => {
-
-            // Arrange
-            TestUtils.setBodyHtml(`<form>
-                                    <input required maxlength="3" />
-                                </form>`);
-            const form = document.querySelector('form');
-            const input = form.querySelector('input');
-            const validateForm = new FormValidation(form);
-
-            // Act & Assert
-            validateForm.isValid();
-            expect(TestUtils.getBodyHtml()).toMatchSnapshot();
-
-            // Make input invalid due to maxlength exceeded
-            input.value = 'xxxx';
-
-            validateForm.isValid();
-            const html = TestUtils.getBodyHtml();
-            expect(html).toMatchSnapshot();
-
-        });
-
-        it('should hide error message if field is now valid', () => {
-
-            // Arrange
-            TestUtils.setBodyHtml(`<form>
-                                        <input required />
-                                    </form>`);
-            const form = document.querySelector('form');
-            const input = form.querySelector('input');
-            const validateForm = new FormValidation(form);
-
-            // Act & Assert
-            validateForm.isValid();
-            expect(TestUtils.getBodyHtml()).toMatchSnapshot();
-
-            // Make input valid
-            input.value = 'x';
-
-            validateForm.isValid();
             const html = TestUtils.getBodyHtml();
             expect(html).toMatchSnapshot();
 
@@ -179,22 +74,16 @@ describe('error messages', () => {
 
     });
 
-    describe('grouped', () => {
+    describe('hideMessage', () => {
 
-        it('should display error messages grouped at the bottom (default)', () => {
+        it('should add hidden class and remove content if element exists', () => {
 
             // Arrange
-            TestUtils.setBodyHtml(`<form>
-                                    <input required />
-                                    <input required minlength="2" value="x" />
-                                </form>`);
-            const form = document.querySelector('form', {
-                groupErrors: true
-            });
-            const validateForm = new FormValidation(form);
+            TestUtils.setBodyHtml('<p class="form-error">error message</p>');
+            const error = document.querySelector('p');
 
             // Act
-            validateForm.isValid();
+            hideMessage(error);
 
             // Assert
             const html = TestUtils.getBodyHtml();
@@ -202,100 +91,37 @@ describe('error messages', () => {
 
         });
 
-        it('should display error messages grouped at the top', () => {
+    });
+
+    describe('getMessage', () => {
+
+        it('should return custom error message if data attr exists', () => {
 
             // Arrange
-            TestUtils.setBodyHtml(`<form>
-                                    <input required />
-                                    <input required minlength="2" value="x" />
-                                </form>`);
-            const form = document.querySelector('form', {
-                groupErrors: true,
-                errorPlacementTopOfForm: true
-            });
-            const validateForm = new FormValidation(form);
+            TestUtils.setBodyHtml('<input data-maxlength-error="maxlength error message" />');
+            const input = document.querySelector('input');
+            const ruleName = 'maxlength';
 
             // Act
-            validateForm.isValid();
+            const result = getMessage(input, ruleName);
 
             // Assert
-            const html = TestUtils.getBodyHtml();
-            expect(html).toMatchSnapshot();
+            expect(result).toEqual('maxlength error message');
 
         });
 
-        it('should not display error messages on valid form', () => {
+        it('should return default error message if data attr does not exist', () => {
 
             // Arrange
-            TestUtils.setBodyHtml(`<form>
-                                    <input required value="x" />
-                                    <input required minlength="2" value="xx" />
-                                </form>`);
-            const form = document.querySelector('form', {
-                groupErrors: true
-            });
-            const validateForm = new FormValidation(form);
+            TestUtils.setBodyHtml('<input />');
+            const input = document.querySelector('input');
+            const ruleName = 'maxlength';
 
             // Act
-            validateForm.isValid();
+            const result = getMessage(input, ruleName);
 
             // Assert
-            const html = TestUtils.getBodyHtml();
-            expect(html).toMatchSnapshot();
-
-        });
-
-        it('should replace existing group error messages', () => {
-
-            // Arrange
-            TestUtils.setBodyHtml(`<form>
-                                    <input required />
-                                    <input required minlength="2" />
-                                </form>`);
-            const form = document.querySelector('form', {
-                groupErrors: true
-            });
-            const inputs = form.querySelectorAll('input');
-            const validateForm = new FormValidation(form);
-
-            // Act & Assert
-            validateForm.isValid();
-            expect(TestUtils.getBodyHtml()).toMatchSnapshot();
-
-            // Make input invalid due to maxlength exceeded
-            inputs[0].value = 'x';
-            inputs[1].value = 'x';
-
-            validateForm.isValid();
-            const html = TestUtils.getBodyHtml();
-            expect(html).toMatchSnapshot();
-
-        });
-
-        it('should hide existing group error message if group is now valid', () => {
-
-            // Arrange
-            TestUtils.setBodyHtml(`<form>
-                                    <input required />
-                                    <input required minlength="2" />
-                                </form>`);
-            const form = document.querySelector('form', {
-                groupErrors: true
-            });
-            const inputs = form.querySelectorAll('input');
-            const validateForm = new FormValidation(form);
-
-            // Act & Assert
-            validateForm.isValid();
-            expect(TestUtils.getBodyHtml()).toMatchSnapshot();
-
-            // Make inputs valid
-            inputs[0].value = 'x';
-            inputs[1].value = 'xx';
-
-            validateForm.isValid();
-            const html = TestUtils.getBodyHtml();
-            expect(html).toMatchSnapshot();
+            expect(result).toEqual('This field must not exceed %s characters in length.');
 
         });
 

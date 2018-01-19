@@ -1,45 +1,40 @@
 import testDefinitions from './rules';
 
-const addMessage = (errorElement, ruleName, field) => {
-    const customMessage = field.getAttribute(`data-${ruleName}-error`) || testDefinitions[ruleName].defaultMessage;
-    if (errorElement) {
-        errorElement.textContent = customMessage;
-        errorElement.classList.remove('is-hidden');
-    } else {
-        const newElement = document.createElement('p');
-        newElement.classList.add('form-error');
-        newElement.textContent = customMessage;
-        field.parentNode.insertBefore(newElement, field.nextSibling);
-    }
-};
-
-const hideMessage = errorElement => {
-    if (errorElement) {
-        errorElement.classList.add('is-hidden');
-        errorElement.textContent = '';
-    }
-};
-
-const findErrorMessage = field => {
+export const getInlineErrorElement = field => {
     const nextSibling = field.nextElementSibling;
 
     if (nextSibling && nextSibling.classList.contains('form-error')) {
+
         return nextSibling;
     }
 
     return false;
-
 };
 
-export default (ruleName, field, isValid) => {
+export const displayInlineMessage = (errorElement, customMessage, field) => {
 
-    const errorElement = findErrorMessage(field);
+    let updateElement = errorElement;
 
-    if (!isValid) {
-        addMessage(errorElement, ruleName, field);
-    } else {
-        hideMessage(errorElement);
+    if (!errorElement) {
+        updateElement = document.createElement('p');
+        updateElement.classList.add('form-error');
+        field.parentNode.insertBefore(updateElement, field.nextSibling);
     }
 
+    updateElement.textContent = customMessage;
+    updateElement.classList.remove('is-hidden');
+
 };
+
+export const hideMessage = errorElement => {
+    if (!errorElement) {
+        return;
+    }
+
+    errorElement.classList.add('is-hidden');
+    errorElement.innerHTML = '';
+
+};
+
+export const getMessage = (field, ruleName) => field.getAttribute(`data-${ruleName}-error`) || testDefinitions[ruleName].defaultMessage;
 
