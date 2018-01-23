@@ -72,7 +72,7 @@ exports[`error messages default should replace existing error message 2`] = `
                                 </form>"
 `;
 
-exports[`error messages grouped should display error messages grouped at the bottom (default) 1`] = `
+exports[`error messages grouped should display error messages grouped at the bottom 1`] = `
 "<form class=\\"has-error\\">
                                     <input required=\\"\\" class=\\"has-error\\">
                                     <input required=\\"\\" minlength=\\"2\\" value=\\"x\\" class=\\"has-error\\"><ul class=\\"form-errors\\"><li>This field is required.</li><li>This field must be at least %s characters in length.</li></ul>
@@ -88,11 +88,18 @@ exports[`error messages grouped should display error messages grouped at the bot
                                 </form>"
 `;
 
-exports[`error messages grouped should display error messages grouped at the bottom above submit button (default) 1`] = `
+exports[`error messages grouped should display error messages grouped at the bottom above submit button 1`] = `
 "<form class=\\"has-error\\">
                                     <input required=\\"\\" class=\\"has-error\\">
                                     <input required=\\"\\" minlength=\\"2\\" value=\\"x\\" class=\\"has-error\\">
                                     <ul class=\\"form-errors\\"><li>This field is required.</li><li>This field must be at least %s characters in length.</li></ul><button type=\\"submit\\"></button>
+                                </form>"
+`;
+
+exports[`error messages grouped should display error messages grouped at the bottom if element not found 1`] = `
+"<form class=\\"has-error\\">
+                                    <input required=\\"\\" class=\\"has-error\\">
+                                    <input required=\\"\\" minlength=\\"2\\" value=\\"x\\" class=\\"has-error\\"><ul class=\\"form-errors\\"><li>This field is required.</li><li>This field must be at least %s characters in length.</li></ul>
                                 </form>"
 `;
 

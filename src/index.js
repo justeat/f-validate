@@ -9,9 +9,7 @@ export const defaultOptions = {
     errorClass: CONSTANTS.cssClasses.hasError,
     successClass: CONSTANTS.cssClasses.hasSuccess,
     focus: false,
-    groupErrors: false,
-    groupErrorsAtTop: false,
-    bottomErrorPlacement: '[type="submit"]'
+    groupErrorPlacement: false
 };
 
 const getForm = descriptor => {
@@ -126,7 +124,7 @@ export default class FormValidation {
                     this.setError(field);
                 }
 
-                if (!this.options.groupErrors) {
+                if (!this.options.groupErrorPlacement) {
                     const errorElement = getInlineErrorElement(field);
                     if (fieldValid) {
                         hideMessage(errorElement);
@@ -151,8 +149,8 @@ export default class FormValidation {
             runCallbacks(this.callBacks.success);
         }
 
-        if (this.options.groupErrors) {
-            const groupedErrorElement = this.getGroupedErrorElement();
+        if (this.options.groupErrorPlacement) {
+            const groupedErrorElement = this.findGroupedErrorElement();
             if (formValid) {
                 hideMessage(groupedErrorElement);
             } else {
@@ -184,7 +182,7 @@ export default class FormValidation {
                 && !f.hasAttribute('data-novalidate'));
     }
 
-    getGroupedErrorElement () {
+    findGroupedErrorElement () {
         const groupedErrorElement = this.form.querySelector(`.${CONSTANTS.cssClasses.formErrors}`);
 
         if (groupedErrorElement !== null) {
@@ -203,9 +201,7 @@ export default class FormValidation {
             updateElement = document.createElement('ul');
             updateElement.classList.add(CONSTANTS.cssClasses.formErrors);
 
-            const bottomElement = this.form.querySelector(this.options.bottomErrorPlacement) || this.form.lastChild;
-            const relativeElement = this.options.groupErrorsAtTop ? this.form.firstChild : bottomElement;
-            this.form.insertBefore(updateElement, relativeElement);
+            this.form.insertBefore(updateElement, this.getGroupedErrorPosition());
 
         } else {
             groupedErrorElement.innerHTML = '';
@@ -216,5 +212,21 @@ export default class FormValidation {
             li.textContent = error;
             updateElement.appendChild(li);
         });
+    }
+
+    getGroupedErrorPosition () {
+
+        const groupElement = this.form.querySelector(this.options.groupErrorPlacement);
+
+        if (groupElement) {
+            return groupElement;
+        }
+
+        if (this.options.groupErrorPlacement === 'top') {
+            return this.form.firstChild;
+        }
+
+        return this.form.lastChild;
+
     }
 }

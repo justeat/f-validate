@@ -603,7 +603,7 @@ describe('error messages', () => {
 
     describe('grouped', () => {
 
-        it('should display error messages grouped at the bottom (default)', () => {
+        it('should display error messages grouped at the bottom', () => {
 
             // Arrange
             TestUtils.setBodyHtml(`<form>
@@ -612,7 +612,7 @@ describe('error messages', () => {
                                 </form>`);
             const form = document.querySelector('form');
             const validateForm = new FormValidation(form, {
-                groupErrors: true
+                groupErrorPlacement: 'bottom'
             });
 
             // Act
@@ -624,7 +624,7 @@ describe('error messages', () => {
 
         });
 
-        it('should display error messages grouped at the bottom above submit button (default)', () => {
+        it('should display error messages grouped at the bottom above submit button', () => {
 
             // Arrange
             TestUtils.setBodyHtml(`<form>
@@ -634,7 +634,7 @@ describe('error messages', () => {
                                 </form>`);
             const form = document.querySelector('form');
             const validateForm = new FormValidation(form, {
-                groupErrors: true
+                groupErrorPlacement: '[type=submit]'
             });
 
             // Act
@@ -657,8 +657,7 @@ describe('error messages', () => {
                                 </form>`);
             const form = document.querySelector('form');
             const validateForm = new FormValidation(form, {
-                groupErrors: true,
-                bottomErrorPlacement: '[data-errors-placement]'
+                groupErrorPlacement: '[data-errors-placement]'
             });
 
             // Act
@@ -679,8 +678,28 @@ describe('error messages', () => {
                                 </form>`);
             const form = document.querySelector('form');
             const validateForm = new FormValidation(form, {
-                groupErrors: true,
-                groupErrorsAtTop: true
+                groupErrorPlacement: 'top'
+            });
+
+            // Act
+            validateForm.isValid();
+
+            // Assert
+            const html = TestUtils.getBodyHtml();
+            expect(html).toMatchSnapshot();
+
+        });
+
+        it('should display error messages grouped at the bottom if element not found', () => {
+
+            // Arrange
+            TestUtils.setBodyHtml(`<form>
+                                    <input required />
+                                    <input required minlength="2" value="x" />
+                                </form>`);
+            const form = document.querySelector('form');
+            const validateForm = new FormValidation(form, {
+                groupErrorPlacement: '[data-errors-placement]'
             });
 
             // Act
@@ -701,7 +720,7 @@ describe('error messages', () => {
                                 </form>`);
             const form = document.querySelector('form');
             const validateForm = new FormValidation(form, {
-                groupErrors: true
+                groupErrorPlacement: 'bottom'
             });
 
             // Act
@@ -723,7 +742,7 @@ describe('error messages', () => {
             const form = document.querySelector('form');
             const inputs = form.querySelectorAll('input');
             const validateForm = new FormValidation(form, {
-                groupErrors: true
+                groupErrorPlacement: 'bottom'
             });
 
             // Act & Assert
@@ -750,7 +769,7 @@ describe('error messages', () => {
             const form = document.querySelector('form');
             const inputs = form.querySelectorAll('input');
             const validateForm = new FormValidation(form, {
-                groupErrors: true
+                groupErrorPlacement: 'bottom'
             });
 
             // Act & Assert
