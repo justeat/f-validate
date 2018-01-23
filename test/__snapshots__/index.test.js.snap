@@ -79,6 +79,23 @@ exports[`error messages grouped should display error messages grouped at the bot
                                 </form>"
 `;
 
+exports[`error messages grouped should display error messages grouped at the bottom above specified element 1`] = `
+"<form class=\\"has-error\\">
+                                    <input required=\\"\\" class=\\"has-error\\">
+                                    <input required=\\"\\" minlength=\\"2\\" value=\\"x\\" class=\\"has-error\\">
+                                    <ul class=\\"form-errors\\"><li>This field is required.</li><li>This field must be at least %s characters in length.</li></ul><p data-errors-placement=\\"\\">arbitrary text</p>
+                                    <button type=\\"submit\\"></button>
+                                </form>"
+`;
+
+exports[`error messages grouped should display error messages grouped at the bottom above submit button (default) 1`] = `
+"<form class=\\"has-error\\">
+                                    <input required=\\"\\" class=\\"has-error\\">
+                                    <input required=\\"\\" minlength=\\"2\\" value=\\"x\\" class=\\"has-error\\">
+                                    <ul class=\\"form-errors\\"><li>This field is required.</li><li>This field must be at least %s characters in length.</li></ul><button type=\\"submit\\"></button>
+                                </form>"
+`;
+
 exports[`error messages grouped should display error messages grouped at the top 1`] = `
 "<form class=\\"has-error\\"><ul class=\\"form-errors\\"><li>This field is required.</li><li>This field must be at least %s characters in length.</li></ul>
                                     <input required=\\"\\" class=\\"has-error\\">

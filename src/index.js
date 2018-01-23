@@ -11,7 +11,7 @@ export const defaultOptions = {
     focus: false,
     groupErrors: false,
     groupErrorsAtTop: false,
-    positionElementId: '[type="submit"]'
+    bottomErrorPlacement: '[type="submit"]'
 };
 
 const getForm = descriptor => {
@@ -203,8 +203,8 @@ export default class FormValidation {
             updateElement = document.createElement('ul');
             updateElement.classList.add(CONSTANTS.cssClasses.formErrors);
 
-            const placeAboveThisElement = this.form.querySelector(this.options.submitButtonId) || this.form.lastChild;
-            const relativeElement = this.options.groupErrorsAtTop ? this.form.firstChild : placeAboveThisElement;
+            const bottomElement = this.form.querySelector(this.options.bottomErrorPlacement) || this.form.lastChild;
+            const relativeElement = this.options.groupErrorsAtTop ? this.form.firstChild : bottomElement;
             this.form.insertBefore(updateElement, relativeElement);
 
         } else {

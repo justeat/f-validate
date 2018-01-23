@@ -624,6 +624,52 @@ describe('error messages', () => {
 
         });
 
+        it('should display error messages grouped at the bottom above submit button (default)', () => {
+
+            // Arrange
+            TestUtils.setBodyHtml(`<form>
+                                    <input required />
+                                    <input required minlength="2" value="x" />
+                                    <button type="submit"></button>
+                                </form>`);
+            const form = document.querySelector('form');
+            const validateForm = new FormValidation(form, {
+                groupErrors: true
+            });
+
+            // Act
+            validateForm.isValid();
+
+            // Assert
+            const html = TestUtils.getBodyHtml();
+            expect(html).toMatchSnapshot();
+
+        });
+
+        it('should display error messages grouped at the bottom above specified element', () => {
+
+            // Arrange
+            TestUtils.setBodyHtml(`<form>
+                                    <input required />
+                                    <input required minlength="2" value="x" />
+                                    <p data-errors-placement>arbitrary text</p>
+                                    <button type="submit"></button>
+                                </form>`);
+            const form = document.querySelector('form');
+            const validateForm = new FormValidation(form, {
+                groupErrors: true,
+                bottomErrorPlacement: '[data-errors-placement]'
+            });
+
+            // Act
+            validateForm.isValid();
+
+            // Assert
+            const html = TestUtils.getBodyHtml();
+            expect(html).toMatchSnapshot();
+
+        });
+
         it('should display error messages grouped at the top', () => {
 
             // Arrange
