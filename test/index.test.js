@@ -255,6 +255,16 @@ describe('on submit', () => {
 
 describe('validateOn', () => {
 
+    const stubbedDate = new Date('Oct 16, 2020');
+
+    beforeEach(() => {
+        global.Date = jest.fn(() => stubbedDate);
+    });
+
+    afterEach(() => {
+        global.Date = Date;
+    });
+
     it('should throw error if value other than \'blur\' or \'keyup\' are passed to \'validateOn\' option', () => {
 
         // Arrange
@@ -339,6 +349,39 @@ describe('validateOn', () => {
 
             // Act
             input.dispatchEvent(createEvent('blur'));
+
+            // Assert
+            const html = TestUtils.getBodyHtml();
+            expect(html).toMatchSnapshot();
+
+        });
+
+        it('should bind to fields within a .validation-group', () => {
+
+            // Arrange
+            TestUtils.setBodyHtml(`<form>
+                                <div class="validation-group"
+                                    data-val-date-in-future>
+                                     <select data-val-custom-type="year">
+                                        <option value="" ></option>
+                                        <option value="2021" selected></option>
+                                    </select>
+                                    <select data-val-custom-type="month">
+                                        <option value="" ></option>
+                                        <option value="01" selected></option>
+                                    </select>
+                                </div>
+                            </form>`);
+            const form = document.querySelector('form');
+            const select = form.querySelector('select');
+
+            // eslint-disable-next-line no-new
+            new FormValidation(form, {
+                validateOn: 'blur'
+            });
+
+            // Act
+            select.dispatchEvent(createEvent('blur'));
 
             // Assert
             const html = TestUtils.getBodyHtml();
