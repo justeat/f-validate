@@ -78,9 +78,9 @@ describe('rule definitions', () => {
 
     });
 
-    it('dateInFuture rule should exist', () => {
+    it('dateinfuture rule should exist', () => {
 
-        expect(testDefinitions).toHaveProperty('dateInFuture');
+        expect(testDefinitions).toHaveProperty('dateinfuture');
 
     });
     it('custom rule should exist', () => {

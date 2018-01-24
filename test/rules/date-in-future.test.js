@@ -1,29 +1,22 @@
 import TestUtils from 'js-test-buddy';
 import FormValidation from '../../src';
+import { stubDate } from '../helpers';
 
 describe('dateInFuture validation rules', () => {
 
-    const stubbedDate = new Date('Oct 16, 2020');
-
-    beforeEach(() => {
-        global.Date = jest.fn(() => stubbedDate);
-    });
-
-    afterEach(() => {
-        global.Date = Date;
-    });
+    stubDate('Oct 16, 2020');
 
     it('should return true if year selected is beyond current year', () => {
 
         // Arrange
         TestUtils.setBodyHtml(`<form>
                                 <div class="validation-group"
-                                    data-val-date-in-future>
-                                     <select data-val-custom-type="year">
+                                    data-val-dateinfuture>
+                                     <select data-val-dateinfuture-type="year">
                                         <option value="" ></option>
                                         <option value="2021" selected></option>
                                     </select>
-                                    <select data-val-custom-type="month">
+                                    <select data-val-dateinfuture-type="month">
                                         <option value="" ></option>
                                         <option value="01" selected></option>
                                     </select>
@@ -46,12 +39,12 @@ describe('dateInFuture validation rules', () => {
         // Arrange
         TestUtils.setBodyHtml(`<form>
                                     <div class="validation-group"
-                                        data-val-date-in-future>
-                                    <select data-val-custom-type="year">
+                                        data-val-dateinfuture>
+                                    <select data-val-dateinfuture-type="year">
                                         <option value="" ></option>
                                         <option value="2020" selected></option>
                                     </select>
-                                    <select data-val-custom-type="month">
+                                    <select data-val-dateinfuture-type="month">
                                         <option value="" ></option>
                                         <option value="10" selected></option>
                                     </select>
@@ -74,12 +67,12 @@ describe('dateInFuture validation rules', () => {
         // Arrange
         TestUtils.setBodyHtml(`<form>
                                     <div class="validation-group"
-                                        data-val-date-in-future>
-                                        <select data-val-custom-type="year">
+                                        data-val-dateinfuture>
+                                        <select data-val-dateinfuture-type="year">
                                             <option value="" ></option>
                                             <option value="2020" selected></option>
                                         </select>
-                                        <select data-val-custom-type="month">
+                                        <select data-val-dateinfuture-type="month">
                                             <option value="" ></option>
                                             <option value="11" selected></option>
                                         </select>
@@ -102,12 +95,12 @@ describe('dateInFuture validation rules', () => {
         // Arrange
         TestUtils.setBodyHtml(`<form>
                                 <div class="validation-group"
-                                    data-val-date-in-future>
-                                    <select data-val-custom-type="year">
+                                    data-val-dateinfuture>
+                                    <select data-val-dateinfuture-type="year">
                                         <option value="" ></option>
                                         <option value="2020" selected></option>
                                     </select>
-                                    <select data-val-custom-type="month">
+                                    <select data-val-dateinfuture-type="month">
                                         <option value="" ></option>
                                         <option value="9" selected></option>
                                     </select>
@@ -130,12 +123,12 @@ describe('dateInFuture validation rules', () => {
         // Arrange
         TestUtils.setBodyHtml(`<form>
                                 <div class="validation-group"
-                                    data-val-date-in-future>
-                                    <select data-val-custom-type="year">
+                                    data-val-dateinfuture>
+                                    <select data-val-dateinfuture-type="year">
                                         <option value="" ></option>
                                         <option value="2021" selected></option>
                                     </select>
-                                    <select data-val-custom-type="month">
+                                    <select data-val-dateinfuture-type="month">
                                         <option value="" ></option>
                                         <option value="0" selected></option>
                                     </select>

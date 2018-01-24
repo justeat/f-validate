@@ -72,12 +72,12 @@ exports[`on submit should validate valid form on submit 1`] = `
 
 exports[`validateOn blur should bind to fields within a .validation-group 1`] = `
 "<form class=\\"has-success\\">
-                                <div class=\\"validation-group has-success\\" data-val-date-in-future=\\"\\">
-                                     <select data-val-custom-type=\\"year\\">
+                                <div class=\\"validation-group has-success\\" data-val-dateinfuture=\\"\\">
+                                     <select data-val-dateinfuture-type=\\"year\\">
                                         <option value=\\"\\"></option>
                                         <option value=\\"2021\\" selected=\\"\\"></option>
                                     </select>
-                                    <select data-val-custom-type=\\"month\\">
+                                    <select data-val-dateinfuture-type=\\"month\\">
                                         <option value=\\"\\"></option>
                                         <option value=\\"01\\" selected=\\"\\"></option>
                                     </select>

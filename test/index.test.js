@@ -1,11 +1,6 @@
 import TestUtils from 'js-test-buddy';
 import FormValidation, { defaultOptions } from '../src';
-
-const createEvent = eventType => {
-    const event = document.createEvent('HTMLEvents');
-    event.initEvent(eventType, true, true);
-    return event;
-};
+import { stubDate, createEvent } from './helpers';
 
 describe('module', () => {
 
@@ -255,16 +250,6 @@ describe('on submit', () => {
 
 describe('validateOn', () => {
 
-    const stubbedDate = new Date('Oct 16, 2020');
-
-    beforeEach(() => {
-        global.Date = jest.fn(() => stubbedDate);
-    });
-
-    afterEach(() => {
-        global.Date = Date;
-    });
-
     it('should throw error if value other than \'blur\' or \'keyup\' are passed to \'validateOn\' option', () => {
 
         // Arrange
@@ -358,15 +343,17 @@ describe('validateOn', () => {
 
         it('should bind to fields within a .validation-group', () => {
 
+            stubDate('Oct 16, 2020');
+
             // Arrange
             TestUtils.setBodyHtml(`<form>
                                 <div class="validation-group"
-                                    data-val-date-in-future>
-                                     <select data-val-custom-type="year">
+                                    data-val-dateinfuture>
+                                     <select data-val-dateinfuture-type="year">
                                         <option value="" ></option>
                                         <option value="2021" selected></option>
                                     </select>
-                                    <select data-val-custom-type="month">
+                                    <select data-val-dateinfuture-type="month">
                                         <option value="" ></option>
                                         <option value="01" selected></option>
                                     </select>
