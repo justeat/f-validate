@@ -1,3 +1,5 @@
+const validationGroup = 'validation-group';
+
 export default {
     email: /^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/,
     escapeChars: /[|\\{}()[\]^$+*?.]/g,
@@ -6,7 +8,9 @@ export default {
         formError: 'form-error',
         formErrors: 'form-errors',
         hasError: 'has-error',
-        hasSuccess: 'has-success'
+        hasSuccess: 'has-success',
+        validationGroup
     },
-    fieldValues: 'input, select, textarea, .validation-group'
+    fieldValues: `input, select, textarea, .${validationGroup}`,
+    validateOnOptions: ['blur', 'keyup']
 };

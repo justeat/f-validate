@@ -1,6 +1,12 @@
 import TestUtils from 'js-test-buddy';
 import FormValidation, { defaultOptions } from '../src';
 
+const createEvent = eventType => {
+    const event = document.createEvent('HTMLEvents');
+    event.initEvent(eventType, true, true);
+    return event;
+};
+
 describe('module', () => {
 
     it('it is a function', () => {
@@ -245,6 +251,152 @@ describe('on submit', () => {
 
     });
 
+});
+
+describe('validateOn', () => {
+
+    it('should throw error if value other than \'blur\' or \'keyup\' are passed to \'validateOn\' option', () => {
+
+        // Arrange
+        TestUtils.setBodyHtml(`<form>
+                                        <input required value="x" />
+                                        <input required>
+                                    </form>`);
+        const form = document.querySelector('form');
+
+        // Act & Assert
+        expect(() => {
+            // eslint-disable-next-line no-new
+            new FormValidation(form, {
+                validateOn: 'other'
+            });
+        }).toThrowError('f-validate: valid options for the \'validateOn\' property are \'blur\' or \'keyup\'');
+
+    });
+
+    describe('blur', () => {
+
+        it('should validate invalid form', () => {
+
+            // Arrange
+            TestUtils.setBodyHtml(`<form>
+                                        <input required />
+                                    </form>`);
+            const form = document.querySelector('form');
+            const input = form.querySelector('input');
+
+            // eslint-disable-next-line no-new
+            new FormValidation(form, {
+                validateOn: 'blur'
+            });
+
+            // Act
+            input.dispatchEvent(createEvent('blur'));
+
+            // Assert
+            const html = TestUtils.getBodyHtml();
+            expect(html).toMatchSnapshot();
+
+        });
+
+        it('should validate valid form', () => {
+
+            // Arrange
+            TestUtils.setBodyHtml(`<form>
+                                        <input required value="x" />
+                                    </form>`);
+            const form = document.querySelector('form');
+            const input = form.querySelector('input');
+
+            // eslint-disable-next-line no-new
+            new FormValidation(form, {
+                validateOn: 'blur'
+            });
+
+            // Act
+            input.dispatchEvent(createEvent('blur'));
+
+            // Assert
+            const html = TestUtils.getBodyHtml();
+            expect(html).toMatchSnapshot();
+
+        });
+
+        it('should not run validation on other fields', () => {
+
+            // Arrange
+            TestUtils.setBodyHtml(`<form>
+                                        <input required value="x" />
+                                        <input required>
+                                    </form>`);
+            const form = document.querySelector('form');
+            const input = form.querySelector('input');
+
+            // eslint-disable-next-line no-new
+            new FormValidation(form, {
+                validateOn: 'blur'
+            });
+
+            // Act
+            input.dispatchEvent(createEvent('blur'));
+
+            // Assert
+            const html = TestUtils.getBodyHtml();
+            expect(html).toMatchSnapshot();
+
+        });
+
+    });
+
+    describe('keyup', () => {
+
+        it('should validate invalid form', () => {
+
+            // Arrange
+            TestUtils.setBodyHtml(`<form>
+                                        <input required />
+                                    </form>`);
+            const form = document.querySelector('form');
+            const input = form.querySelector('input');
+
+            // eslint-disable-next-line no-new
+            new FormValidation(form, {
+                validateOn: 'keyup'
+            });
+
+            // Act
+            input.dispatchEvent(createEvent('keyup'));
+
+            // Assert
+            const html = TestUtils.getBodyHtml();
+            expect(html).toMatchSnapshot();
+
+        });
+
+        it('should validate valid form', () => {
+
+            // Arrange
+            TestUtils.setBodyHtml(`<form>
+                                        <input required value="x" />
+                                    </form>`);
+            const form = document.querySelector('form');
+            const input = form.querySelector('input');
+
+            // eslint-disable-next-line no-new
+            new FormValidation(form, {
+                validateOn: 'keyup'
+            });
+
+            // Act
+            input.dispatchEvent(createEvent('keyup'));
+
+            // Assert
+            const html = TestUtils.getBodyHtml();
+            expect(html).toMatchSnapshot();
+
+        });
+
+    });
 });
 
 describe('adding custom validation', () => {
