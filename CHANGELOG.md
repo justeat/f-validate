@@ -10,6 +10,8 @@ v0.8.0
 
 ### Added
 - Ability to validate on 'blur' or 'keyup'
+- Migrated 'dateinfuture' rule from other project
+- Explicitly restrict an implementation where you're able to both group messages and validate on blur/keyup
 
 v0.7.0
 ------------------------------
