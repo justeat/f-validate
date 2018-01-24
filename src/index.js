@@ -44,6 +44,9 @@ export default class FormValidation {
         if (this.options.onError) {
             this.on('error', this.options.onError);
         }
+        if (this.options.validateOn) {
+            this.validateOn();
+        }
         this.errorMessages = [];
     }
 
@@ -82,12 +85,16 @@ export default class FormValidation {
         element.classList.add(this.options.errorClass);
     }
 
-    isValid (event) {
+    isValid (event, currentField) {
 
         let formValid = true;
         this.errorMessages = [];
 
         this.fields.forEach(field => {
+
+            if (currentField && currentField !== field) {
+                return;
+            }
 
             let errorMessage = '';
 
@@ -226,4 +233,28 @@ export default class FormValidation {
         return this.form.firstChild;
 
     }
+
+    validateOn () {
+
+        if (this.options.groupErrorPlacement) {
+            throw new Error('f-validate: validation on \'blur\' or \'keyup\' cannot be perform if errors are grouped');
+        }
+
+        if (CONSTANTS.validateOnOptions.indexOf(this.options.validateOn) === -1) {
+            throw new Error('f-validate: valid options for the \'validateOn\' property are \'blur\' or \'keyup\'');
+        }
+
+        this.fields.forEach(field => {
+            if (field.classList.contains(CONSTANTS.cssClasses.validationGroup)) {
+                field.querySelectorAll(CONSTANTS.fieldValues).forEach(formElement =>
+
+                    // Bind each form element within a validation-group
+                    formElement.addEventListener(this.options.validateOn, this.isValid.bind(this, null, field)));
+
+            } else {
+                field.addEventListener(this.options.validateOn, this.isValid.bind(this, null, field));
+            }
+        });
+    }
+
 }
