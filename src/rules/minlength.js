@@ -1,4 +1,3 @@
-
 export default {
     condition: field => field.hasAttribute('minlength') || field.hasAttribute('data-val-minlength'),
 
@@ -12,5 +11,8 @@ export default {
             || field.getAttribute('data-val-minlength'), 10);
     },
 
-    defaultMessage: 'This field must be at least %s characters in length.'
+    defaultMessage: 'This field must be at least {0} characters in length.',
+
+    defaultMessageValue: field => parseInt(field.getAttribute('minlength')
+        || field.getAttribute('data-val-minlength'), 10)
 };

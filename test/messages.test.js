@@ -110,20 +110,5 @@ describe('messages', () => {
 
         });
 
-        it('should return default error message if data attr does not exist', () => {
-
-            // Arrange
-            TestUtils.setBodyHtml('<input />');
-            const input = document.querySelector('input');
-            const ruleName = 'maxlength';
-
-            // Act
-            const result = getMessage(input, ruleName);
-
-            // Assert
-            expect(result).toEqual('This field must not exceed %s characters in length.');
-
-        });
-
     });
 });

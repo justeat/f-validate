@@ -15,5 +15,7 @@ export default {
         return false;
     },
 
-    defaultMessage: 'This field does not match the %s field.'
+    defaultMessage: 'This field does not match the {0} field.',
+
+    defaultMessageValue: field => field.getAttribute('data-val-equalto').replace('*.', '')
 };

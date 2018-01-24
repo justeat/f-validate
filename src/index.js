@@ -89,7 +89,7 @@ export default class FormValidation {
 
         this.fields.forEach(field => {
 
-            let customMessage = '';
+            let errorMessage = '';
 
             // This needs to be set outside of the forEach loop, as otherwise only the final rule will apply the state
             let fieldValid = true;
@@ -108,8 +108,8 @@ export default class FormValidation {
                     fieldHasValidation = true;
                     if (!definition.test(field)) {
                         fieldValid = false;
-                        customMessage = getMessage(field, ruleName);
-                        this.errorMessages.push(customMessage);
+                        errorMessage = getMessage(field, ruleName);
+                        this.errorMessages.push(errorMessage);
                     }
                 }
 
@@ -129,7 +129,7 @@ export default class FormValidation {
                     if (fieldValid) {
                         hideMessage(errorElement);
                     } else {
-                        displayInlineMessage(errorElement, customMessage, field);
+                        displayInlineMessage(errorElement, errorMessage, field);
                     }
                 }
 
@@ -185,12 +185,9 @@ export default class FormValidation {
     findGroupedErrorElement () {
         const groupedErrorElement = this.form.querySelector(`.${CONSTANTS.cssClasses.formErrors}`);
 
-        if (groupedErrorElement !== null) {
-
-            return groupedErrorElement;
-        }
-
-        return false;
+        return groupedErrorElement !== null
+            ? groupedErrorElement
+            : false;
     }
 
     displayGroupedMessages (groupedErrorElement) {
@@ -222,11 +219,11 @@ export default class FormValidation {
             return groupElement;
         }
 
-        if (this.options.groupErrorPlacement === 'top') {
-            return this.form.firstChild;
+        if (this.options.groupErrorPlacement === 'bottom') {
+            return this.form.lastChild;
         }
 
-        return this.form.lastChild;
+        return this.form.firstChild;
 
     }
 }

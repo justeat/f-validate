@@ -37,5 +37,16 @@ export const hideMessage = errorElement => {
 
 };
 
-export const getMessage = (field, ruleName) => field.getAttribute(`data-${ruleName}-error`) || testDefinitions[ruleName].defaultMessage;
+const getDefaultMessage = (field, ruleName) => {
+
+    if (!testDefinitions[ruleName].defaultMessageValue) {
+        return testDefinitions[ruleName].defaultMessage;
+    }
+
+    return testDefinitions[ruleName].defaultMessage.replace('{0}', testDefinitions[ruleName]
+        .defaultMessageValue(field));
+};
+
+export const getMessage = (field, ruleName) => field.getAttribute(`data-${ruleName}-error`)
+    || getDefaultMessage(field, ruleName);
 
