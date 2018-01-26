@@ -1,4 +1,4 @@
-import testDefinitions from './rules';
+import testDefinitions from './rules/';
 import { addCallBack, runCallbacks } from './callbacks';
 import { getInlineErrorElement, displayInlineMessage, hideMessage, getMessage } from './messages';
 import CONSTANTS from './constants';
