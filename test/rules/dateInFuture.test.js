@@ -1,6 +1,6 @@
 import TestUtils from 'js-test-buddy';
 import FormValidation from '../../src';
-import stubDate from '../helpers/stub-date';
+import stubDate from '../helpers/stubDate';
 
 describe('dateInFuture validation rules', () => {
 

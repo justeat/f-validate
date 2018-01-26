@@ -1,7 +1,7 @@
 import $ from '@justeat/f-dom';
 
 export default {
-    condition: field => field.hasAttribute('data-val-dateinfuture'),
+    condition: field => field.hasAttribute('data-val-dateInFuture'),
 
     test: element => {
 
@@ -9,8 +9,8 @@ export default {
         const currentMonth = dateToday.getMonth() + 1;
         const currentYear = dateToday.getFullYear();
 
-        const selectedMonth = Number($.first('[data-val-dateinfuture-type="month"]', element).value);
-        const selectedYear = Number($.first('[data-val-dateinfuture-type="year"]', element).value);
+        const selectedMonth = Number($.first('[data-val-dateInFuture-type="month"]', element).value);
+        const selectedYear = Number($.first('[data-val-dateInFuture-type="year"]', element).value);
 
         if (selectedYear > currentYear && selectedMonth > 0) {
             return true;

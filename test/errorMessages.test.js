@@ -379,7 +379,7 @@ describe('error messages', () => {
                     groupErrorPlacement: 'bottom',
                     validateOn: 'blur'
                 });
-            }).toThrowError('f-validate: validation on \'blur\' or \'keyup\' cannot be perform if errors are grouped');
+            }).toThrowError('f-validate: validation on \'blur\' or \'keyup\' cannot be performed if errors are grouped');
 
         });
 
