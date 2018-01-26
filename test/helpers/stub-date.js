@@ -1,9 +1,3 @@
-const createEvent = eventType => {
-    const event = document.createEvent('HTMLEvents');
-    event.initEvent(eventType, true, true);
-    return event;
-};
-
 const stubDate = date => {
 
     const stubbedDate = new Date(date);
@@ -18,7 +12,4 @@ const stubDate = date => {
 
 };
 
-export {
-    createEvent,
-    stubDate
-};
+export default stubDate;

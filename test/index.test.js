@@ -1,6 +1,6 @@
 import TestUtils from 'js-test-buddy';
 import FormValidation, { defaultOptions } from '../src';
-import { stubDate, createEvent } from './helpers';
+import stubDate from './helpers/stub-date';
 
 describe('module', () => {
 
@@ -286,7 +286,7 @@ describe('validateOn', () => {
             });
 
             // Act
-            input.dispatchEvent(createEvent('blur'));
+            TestUtils.dispatchEvent(input, 'blur');
 
             // Assert
             const html = TestUtils.getBodyHtml();
@@ -309,7 +309,7 @@ describe('validateOn', () => {
             });
 
             // Act
-            input.dispatchEvent(createEvent('blur'));
+            TestUtils.dispatchEvent(input, 'blur');
 
             // Assert
             const html = TestUtils.getBodyHtml();
@@ -333,7 +333,7 @@ describe('validateOn', () => {
             });
 
             // Act
-            input.dispatchEvent(createEvent('blur'));
+            TestUtils.dispatchEvent(input, 'blur');
 
             // Assert
             const html = TestUtils.getBodyHtml();
@@ -368,7 +368,7 @@ describe('validateOn', () => {
             });
 
             // Act
-            select.dispatchEvent(createEvent('blur'));
+            TestUtils.dispatchEvent(select, 'blur');
 
             // Assert
             const html = TestUtils.getBodyHtml();
@@ -395,7 +395,7 @@ describe('validateOn', () => {
             });
 
             // Act
-            input.dispatchEvent(createEvent('keyup'));
+            TestUtils.dispatchEvent(input, 'keyup');
 
             // Assert
             const html = TestUtils.getBodyHtml();
@@ -418,7 +418,7 @@ describe('validateOn', () => {
             });
 
             // Act
-            input.dispatchEvent(createEvent('keyup'));
+            TestUtils.dispatchEvent(input, 'keyup');
 
             // Assert
             const html = TestUtils.getBodyHtml();
