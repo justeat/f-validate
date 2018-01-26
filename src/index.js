@@ -92,6 +92,7 @@ export default class FormValidation {
 
         this.fields.forEach(field => {
 
+            // currentField refers to a field that is being validated on blur/keyup
             if (currentField && currentField !== field) {
                 return;
             }
