@@ -34,7 +34,7 @@ describe('dateInFuture validation rules', () => {
 
     });
 
-    it('should return false if year selected is current year, and month is current month', () => {
+    it('should return true if year selected is current year, and month is current month', () => {
 
         // Arrange
         TestUtils.setBodyHtml(`<form>
@@ -58,7 +58,7 @@ describe('dateInFuture validation rules', () => {
         const isFormValid = validateForm.isValid();
 
         // Assert
-        expect(isFormValid).toBe(false);
+        expect(isFormValid).toBe(true);
 
     });
 

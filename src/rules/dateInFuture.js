@@ -16,7 +16,7 @@ export default {
             return true;
         }
 
-        return selectedYear === currentYear && selectedMonth > currentMonth;
+        return selectedYear === currentYear && selectedMonth >= currentMonth;
 
     },
 

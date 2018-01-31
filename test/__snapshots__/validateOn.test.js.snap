@@ -22,9 +22,9 @@ exports[`validateOn blur should not run validation on other fields 1`] = `
                                     </form>"
 `;
 
-exports[`validateOn blur should validate invalid form 1`] = `
-"<form class=\\"has-error\\">
-                                        <input required=\\"\\" class=\\"has-error\\"><p class=\\"form-error\\">This field is required.</p>
+exports[`validateOn blur should not validate if field is empty 1`] = `
+"<form class=\\"has-success\\">
+                                        <input required=\\"\\">
                                     </form>"
 `;
 
@@ -34,9 +34,9 @@ exports[`validateOn blur should validate valid form 1`] = `
                                     </form>"
 `;
 
-exports[`validateOn keyup should validate invalid form 1`] = `
-"<form class=\\"has-error\\">
-                                        <input required=\\"\\" class=\\"has-error\\"><p class=\\"form-error\\">This field is required.</p>
+exports[`validateOn keyup should not validate if field is empty 1`] = `
+"<form class=\\"has-success\\">
+                                        <input required=\\"\\">
                                     </form>"
 `;
 

@@ -97,6 +97,11 @@ export default class FormValidation {
                 return;
             }
 
+            // only validate on blur/keyup if the field is not empty
+            if (currentField && field.value === '') {
+                return;
+            }
+
             let errorMessage = '';
 
             // This needs to be set outside of the forEach loop, as otherwise only the final rule will apply the state
