@@ -1,5 +1,6 @@
 const cssClasses = {
     isHidden: 'is-hidden',
+    isDirty: 'is-dirty',
     formError: 'form-error',
     formErrors: 'form-errors',
     hasError: 'has-error',

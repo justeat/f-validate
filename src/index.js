@@ -85,20 +85,20 @@ export default class FormValidation {
         element.classList.add(this.options.errorClass);
     }
 
-    isValid (event, currentField) {
+    isValid (event, currentElement) {
 
         let formValid = true;
         this.errorMessages = [];
 
         this.fields.forEach(field => {
 
-            // currentField refers to a field that is being validated on blur/keyup
-            if (currentField && currentField !== field) {
+            // currentElement refers to an element that is being validated on blur/keyup
+            if (currentElement && currentElement.field !== field) {
                 return;
             }
 
             // only validate on blur/keyup if the field is not empty
-            if (currentField && field.value === '') {
+            if (currentElement && field.value === '') {
                 return;
             }
 
@@ -119,7 +119,7 @@ export default class FormValidation {
 
                 if (definition.condition(field)) {
                     fieldHasValidation = true;
-                    if (!definition.test(field)) {
+                    if (!definition.test(field, currentElement)) {
                         fieldValid = false;
                         errorMessage = getMessage(field, ruleName);
                         this.errorMessages.push(errorMessage);
@@ -138,11 +138,11 @@ export default class FormValidation {
                 }
 
                 if (!this.options.groupErrorPlacement) {
-                    const errorElement = getInlineErrorElement(field);
+                    const errorElement = getInlineErrorElement(field, this.form);
                     if (fieldValid) {
                         hideMessage(errorElement);
                     } else {
-                        displayInlineMessage(errorElement, errorMessage, field);
+                        displayInlineMessage(errorElement, errorMessage, field, this.form);
                     }
                 }
 
@@ -259,16 +259,21 @@ export default class FormValidation {
 
         this.fields.forEach(field => {
             if (field.classList.contains(CONSTANTS.cssClasses.validationGroup)) {
-                field.querySelectorAll(CONSTANTS.fieldValues).forEach(formElement =>
+                field.querySelectorAll(CONSTANTS.fieldValues).forEach(childField =>
 
                     // Binds each form element within a validation-group to the specified event.
-                    // When this event is triggered the validation-group will be passed as the element to test.
+                    // When this event is triggered the validation-group element will be passed as the element to test.
+                    // The child field is also passed for use within a rule test method
                     // Null is being passed as the isValid method expects 'field' as its second argument
-                    formElement.addEventListener(this.options.validateOn, this.isValid.bind(this, null, field)));
+                    childField.addEventListener(this.options.validateOn,
+                        this.isValid.bind(this, null, {
+                            field,
+                            childField
+                        })));
 
             } else {
                 // Null is being passed as the isValid method expects 'field' as its second argument
-                field.addEventListener(this.options.validateOn, this.isValid.bind(this, null, field));
+                field.addEventListener(this.options.validateOn, this.isValid.bind(this, null, { field }));
             }
         });
     }

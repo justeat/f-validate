@@ -8,9 +8,13 @@ v0.10.0
 ------------------------------
 *January 31, 2018*
 
+### Added
+- Allow user to specify location of error message per field
+
 ### Changed
 - Only validate fields on blur/keyup if they are not empty
-- Amending dateInFuture rule to validate correctly when selecting current year/month
+- dateInFuture: Only validating fields when they have both been interacted with
+- dateInFuture: Allowing current year/month to be valid
 
 
 v0.9.0

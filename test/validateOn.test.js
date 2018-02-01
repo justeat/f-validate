@@ -95,7 +95,7 @@ describe('validateOn', () => {
 
         });
 
-        it('should bind to fields within a .validation-group', () => {
+        it('should return true on blur, as second select has not been touched', () => {
 
             stubDate('Oct 16, 2020');
 
@@ -109,7 +109,6 @@ describe('validateOn', () => {
                                     </select>
                                     <select data-val-dateinfuture-type="month">
                                         <option value="" ></option>
-                                        <option value="01" selected></option>
                                     </select>
                                 </div>
                             </form>`);
@@ -123,6 +122,108 @@ describe('validateOn', () => {
 
             // Act
             TestUtils.dispatchEvent(select, 'blur');
+
+            // Assert
+            const html = TestUtils.getBodyHtml();
+            expect(html).toMatchSnapshot();
+
+        });
+
+        it('should false true on blur, as second select has been touched', () => {
+
+            stubDate('Oct 16, 2020');
+
+            // Arrange
+            TestUtils.setBodyHtml(`<form>
+                                <div class="validation-group"
+                                    data-val-dateinfuture>
+                                     <select data-val-dateinfuture-type="year">
+                                        <option value="" ></option>
+                                        <option value="2021" selected></option>
+                                    </select>
+                                    <select data-val-dateinfuture-type="month" class="is-dirty">
+                                        <option value="" ></option>
+                                    </select>
+                                </div>
+                            </form>`);
+            const form = document.querySelector('form');
+            const select = form.querySelector('select');
+
+            // eslint-disable-next-line no-new
+            new FormValidation(form, {
+                validateOn: 'blur'
+            });
+
+            // Act
+            TestUtils.dispatchEvent(select, 'blur');
+
+            // Assert
+            const html = TestUtils.getBodyHtml();
+            expect(html).toMatchSnapshot();
+
+        });
+
+        it('should return true on blur, as first select has not been touched', () => {
+
+            stubDate('Oct 16, 2020');
+
+            // Arrange
+            TestUtils.setBodyHtml(`<form>
+                                <div class="validation-group"
+                                    data-val-dateinfuture>
+                                     <select data-val-dateinfuture-type="year">
+                                        <option value="" ></option>
+                                    </select>
+                                    <select data-val-dateinfuture-type="month">
+                                        <option value="" ></option>
+                                        <option value="01" selected></option>
+                                    </select>
+                                </div>
+                            </form>`);
+            const form = document.querySelector('form');
+            const [, select2] = form.querySelectorAll('select');
+
+            // eslint-disable-next-line no-new
+            new FormValidation(form, {
+                validateOn: 'blur'
+            });
+
+            // Act
+            TestUtils.dispatchEvent(select2, 'blur');
+
+            // Assert
+            const html = TestUtils.getBodyHtml();
+            expect(html).toMatchSnapshot();
+
+        });
+
+        it('should return false on blur, as first select has been touched', () => {
+
+            stubDate('Oct 16, 2020');
+
+            // Arrange
+            TestUtils.setBodyHtml(`<form>
+                                <div class="validation-group"
+                                    data-val-dateinfuture>
+                                     <select data-val-dateinfuture-type="year" class="is-dirty">
+                                        <option value="" ></option>
+                                    </select>
+                                    <select data-val-dateinfuture-type="month">
+                                        <option value="" ></option>
+                                        <option value="01" selected></option>
+                                    </select>
+                                </div>
+                            </form>`);
+            const form = document.querySelector('form');
+            const [, select2] = form.querySelectorAll('select');
+
+            // eslint-disable-next-line no-new
+            new FormValidation(form, {
+                validateOn: 'blur'
+            });
+
+            // Act
+            TestUtils.dispatchEvent(select2, 'blur');
 
             // Assert
             const html = TestUtils.getBodyHtml();
