@@ -387,7 +387,7 @@ describe('error messages', () => {
 
     describe('custom positioning on field', () => {
 
-        it('should create a new error message', () => {
+        it('should create a new error message after specified element', () => {
 
             // Arrange
             TestUtils.setBodyHtml(`<form>

@@ -17,11 +17,9 @@ export const getInlineErrorElement = (field, form) => {
     const nextSibling = field.nextElementSibling;
     const customErrorEl = getCustomErrorElement(field, form);
 
-    if (customErrorEl) {
-        if (customErrorEl && customErrorEl.nextElementSibling
-            && customErrorEl.nextElementSibling.classList.contains(CONSTANTS.cssClasses.formError)) {
-            return customErrorEl.nextElementSibling;
-        }
+    if (customErrorEl && customErrorEl.nextElementSibling
+        && customErrorEl.nextElementSibling.classList.contains(CONSTANTS.cssClasses.formError)) {
+        return customErrorEl.nextElementSibling;
     }
 
     if (nextSibling && nextSibling.classList.contains(CONSTANTS.cssClasses.formError)) {

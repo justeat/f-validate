@@ -93,12 +93,8 @@ export default class FormValidation {
         this.fields.forEach(field => {
 
             // currentElement refers to an element that is being validated on blur/keyup
-            if (currentElement && currentElement.field !== field) {
-                return;
-            }
-
             // only validate on blur/keyup if the field is not empty
-            if (currentElement && field.value === '') {
+            if (currentElement && (currentElement.field !== field || field.value === '')) {
                 return;
             }
 
@@ -119,6 +115,11 @@ export default class FormValidation {
 
                 if (definition.condition(field)) {
                     fieldHasValidation = true;
+
+                    if (definition.preCondition) {
+                        definition.preCondition(field, currentElement);
+                    }
+
                     if (!definition.test(field, currentElement)) {
                         fieldValid = false;
                         errorMessage = getMessage(field, ruleName);

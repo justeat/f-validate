@@ -95,7 +95,7 @@ describe('validateOn', () => {
 
         });
 
-        it('should return true on blur, as second select has not been touched', () => {
+        it('should set form state to valid, as second select has not been touched', () => {
 
             stubDate('Oct 16, 2020');
 
@@ -129,7 +129,7 @@ describe('validateOn', () => {
 
         });
 
-        it('should false true on blur, as second select has been touched', () => {
+        it('should set form state to invalid, as second select has been touched', () => {
 
             stubDate('Oct 16, 2020');
 
@@ -141,7 +141,7 @@ describe('validateOn', () => {
                                         <option value="" ></option>
                                         <option value="2021" selected></option>
                                     </select>
-                                    <select data-val-dateinfuture-type="month" class="is-dirty">
+                                    <select data-val-dateinfuture-type="month" data-touched="true">
                                         <option value="" ></option>
                                     </select>
                                 </div>
@@ -163,7 +163,7 @@ describe('validateOn', () => {
 
         });
 
-        it('should return true on blur, as first select has not been touched', () => {
+        it('should set form state to valid, as first select has not been touched', () => {
 
             stubDate('Oct 16, 2020');
 
@@ -197,7 +197,7 @@ describe('validateOn', () => {
 
         });
 
-        it('should return false on blur, as first select has been touched', () => {
+        it('should set form state to invalid, as first select has been touched', () => {
 
             stubDate('Oct 16, 2020');
 
@@ -205,7 +205,7 @@ describe('validateOn', () => {
             TestUtils.setBodyHtml(`<form>
                                 <div class="validation-group"
                                     data-val-dateinfuture>
-                                     <select data-val-dateinfuture-type="year" class="is-dirty">
+                                     <select data-val-dateinfuture-type="year" data-touched="true">
                                         <option value="" ></option>
                                     </select>
                                     <select data-val-dateinfuture-type="month">

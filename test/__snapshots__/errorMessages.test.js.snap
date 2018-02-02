@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`error messages custom positioning on field should create a new error message 1`] = `
+exports[`error messages custom positioning on field should create a new error message after specified element 1`] = `
 "<form class=\\"has-error\\">
                                         <input required=\\"\\" class=\\"has-error\\"><p class=\\"form-error\\">This field is required.</p>
                                         <input required=\\"\\" data-val-error-placement=\\".arbitrary-element\\" class=\\"has-error\\">

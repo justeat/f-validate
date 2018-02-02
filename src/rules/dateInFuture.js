@@ -17,13 +17,12 @@ export default {
 
         // Only applies to blur/keyup validation
         if (current) {
-            // Apply dirty class if select has been interacted with
-            current.childField.classList.add(CONSTANTS.cssClasses.isDirty);
+            const notInErrorState = !current.field.classList.contains(CONSTANTS.cssClasses.hasError);
+            const monthNotTouched = selectedMonthVal === 0 && !selectedMonthEl.hasAttribute('data-touched');
+            const yearNotTouched = selectedYearVal === 0 && !selectedYearEl.hasAttribute('data-touched');
 
             // If one select has not been interacted with do not set to invalid
-            if (!current.field.classList.contains(CONSTANTS.cssClasses.hasError) &&
-                ((selectedMonthVal === 0 && !selectedMonthEl.classList.contains(CONSTANTS.cssClasses.isDirty)) ||
-                    (selectedYearVal === 0 && !selectedYearEl.classList.contains(CONSTANTS.cssClasses.isDirty)))) {
+            if (notInErrorState && (monthNotTouched || yearNotTouched)) {
                 return true;
             }
         }
@@ -34,6 +33,13 @@ export default {
 
         return selectedYearVal === currentYear && selectedMonthVal >= currentMonth;
 
+    },
+
+    preCondition: (element, current) => {
+        if (!current) {
+            return;
+        }
+        current.childField.setAttribute('data-touched', true);
     },
 
     defaultMessage: 'This date must be in the future.'
