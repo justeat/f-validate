@@ -1,3 +1,4 @@
+import $ from '@justeat/f-dom/dist/index';
 import testDefinitions from './rules';
 import { addCallBack, runCallbacks } from './callbacks';
 import { getInlineErrorElement, displayInlineMessage, hideMessage, getMessage } from './messages';
@@ -26,6 +27,18 @@ const getForm = descriptor => {
     }
 
     return form;
+
+};
+
+const elementsUntouched = (element, current, touchedSelectors) => {
+
+    const notInErrorState = !current.field.classList.contains(CONSTANTS.cssClasses.hasError);
+    const elementsNotTouched = touchedSelectors
+        .map(childSelector => $.first(childSelector, element))
+        .filter(el => el && !el.hasAttribute('data-touched'));
+
+    // If one select has not been interacted with do not run test method
+    return notInErrorState && elementsNotTouched.length > 0;
 
 };
 
@@ -115,12 +128,14 @@ export default class FormValidation {
 
                 if (definition.condition(field)) {
                     fieldHasValidation = true;
+                    let skipTest = false;
 
-                    if (definition.preCondition) {
-                        definition.preCondition(field, currentElement);
+                    if (definition.touchedSelectors && currentElement) {
+                        currentElement.childField.setAttribute('data-touched', true);
+                        skipTest = elementsUntouched(field, currentElement, definition.touchedSelectors);
                     }
 
-                    if (!definition.test(field, currentElement)) {
+                    if (!skipTest && !definition.test(field, currentElement)) {
                         fieldValid = false;
                         errorMessage = getMessage(field, ruleName);
                         this.errorMessages.push(errorMessage);

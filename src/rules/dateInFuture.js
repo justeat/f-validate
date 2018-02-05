@@ -1,10 +1,9 @@
 import $ from '@justeat/f-dom';
-import CONSTANTS from '../constants';
 
 export default {
     condition: field => field.hasAttribute('data-val-dateInFuture'),
 
-    test: (element, current) => {
+    test: element => {
 
         const dateToday = new Date();
         const currentMonth = dateToday.getMonth() + 1;
@@ -15,18 +14,6 @@ export default {
         const selectedMonthVal = Number(selectedMonthEl.value);
         const selectedYearVal = Number(selectedYearEl.value);
 
-        // Only applies to blur/keyup validation
-        if (current) {
-            const notInErrorState = !current.field.classList.contains(CONSTANTS.cssClasses.hasError);
-            const monthNotTouched = selectedMonthVal === 0 && !selectedMonthEl.hasAttribute('data-touched');
-            const yearNotTouched = selectedYearVal === 0 && !selectedYearEl.hasAttribute('data-touched');
-
-            // If one select has not been interacted with do not set to invalid
-            if (notInErrorState && (monthNotTouched || yearNotTouched)) {
-                return true;
-            }
-        }
-
         if (selectedYearVal > currentYear && selectedMonthVal > 0) {
             return true;
         }
@@ -35,12 +22,7 @@ export default {
 
     },
 
-    preCondition: (element, current) => {
-        if (!current) {
-            return;
-        }
-        current.childField.setAttribute('data-touched', true);
-    },
+    touchedSelectors: ['[data-val-dateInFuture-type="month"]', '[data-val-dateInFuture-type="year"]'],
 
     defaultMessage: 'This date must be in the future.'
 };

@@ -22,7 +22,7 @@ describe('CONSTANTS', () => {
     });
 
     it('should contain fieldValues', () => {
-        const values = CONSTANTS.fieldValues.split(',');
+        const values = CONSTANTS.fieldValues.split(', ');
 
         expect(values).toContain('input');
         expect(values).toContain('select');
