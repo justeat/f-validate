@@ -1,4 +1,4 @@
-import $ from '@justeat/f-dom/dist/index';
+import $ from '@justeat/f-dom';
 import testDefinitions from './rules';
 import { addCallBack, runCallbacks } from './callbacks';
 import { getInlineErrorElement, displayInlineMessage, hideMessage, getMessage } from './messages';
@@ -130,6 +130,7 @@ export default class FormValidation {
                     fieldHasValidation = true;
                     let skipTest = false;
 
+                    // If rule has elements that need to be checked for touch, and validation is happening on blur/keyup
                     if (definition.touchedSelectors && currentElement) {
                         currentElement.childField.setAttribute('data-touched', true);
                         skipTest = elementsUntouched(field, currentElement, definition.touchedSelectors);
