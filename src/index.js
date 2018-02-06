@@ -98,6 +98,13 @@ export default class FormValidation {
         element.classList.add(this.options.errorClass);
     }
 
+    /**
+     * Validates the form
+     *
+     * @param event
+     * @param {object} currentElement
+     * @returns {boolean}
+     */
     isValid (event, currentElement) {
 
         let formValid = true;

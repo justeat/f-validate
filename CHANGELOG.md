@@ -6,7 +6,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 v0.10.0
 ------------------------------
-*January 31, 2018*
+*February 6, 2018*
 
 ### Added
 - Allow user to specify location of error message per field
