@@ -8,5 +8,5 @@ export default {
         return isChecked || (!isChecked && field.value.length > 0);
     },
 
-    defaultMessage: 'This date must be in the future.'
+    defaultMessage: 'This field is required.'
 };
