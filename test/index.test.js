@@ -282,11 +282,12 @@ describe('on submit', () => {
 
 describe('on keydown', () => {
 
-    it('should validate valid form on \'enter\'', () => {
+    it('should validate entire form on \'enter\'', () => {
 
         // Arrange
         TestUtils.setBodyHtml(`<form>
                                             <input required value="test" />
+                                            <input required value="" />
                                             <button type="submit">submit</button>
                                         </form>`);
         const form = document.querySelector('form');
@@ -295,7 +296,7 @@ describe('on keydown', () => {
 
         // Act
         const event = new KeyboardEvent('keydown', {
-            which: 13
+            key: 'Enter'
         });
         input.dispatchEvent(event);
 
@@ -318,7 +319,7 @@ describe('on keydown', () => {
 
         // Act
         const event = new KeyboardEvent('keydown', {
-            which: 9
+            key: 'Tab'
         });
         input.dispatchEvent(event);
 

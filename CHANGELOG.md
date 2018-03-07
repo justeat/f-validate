@@ -8,7 +8,7 @@ v0.15.0
 *March 7, 2018*
 
 ### Added
-- Improved accessibility by adding 'enter' keyboard event
+- Improved accessibility by allowing a user to validate the form on pressing enter.
 
 
 v0.14.0

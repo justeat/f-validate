@@ -71,7 +71,7 @@ export default class FormValidation {
         // Allow fields to be validated on 'enter'
         this.fields.forEach(field => {
             field.addEventListener('keydown', event => {
-                if (event.which === 13) {
+                if (event.key === 'Enter') {
                     this.isValid(event);
                 }
             });
