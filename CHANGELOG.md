@@ -3,6 +3,13 @@
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+v0.15.0
+------------------------------
+*March 7, 2018*
+
+### Added
+- Improved accessibility by adding 'enter' keyboard event
+
 
 v0.14.0
 ------------------------------

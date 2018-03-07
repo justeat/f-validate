@@ -280,6 +280,56 @@ describe('on submit', () => {
 
 });
 
+describe('on keydown', () => {
+
+    it('should validate valid form on \'enter\'', () => {
+
+        // Arrange
+        TestUtils.setBodyHtml(`<form>
+                                            <input required value="test" />
+                                            <button type="submit">submit</button>
+                                        </form>`);
+        const form = document.querySelector('form');
+        const input = form.querySelector('input');
+        new FormValidation(form); // eslint-disable-line no-new
+
+        // Act
+        const event = new KeyboardEvent('keydown', {
+            which: 13
+        });
+        input.dispatchEvent(event);
+
+        // Assert
+        const html = TestUtils.getBodyHtml();
+        expect(html).toMatchSnapshot();
+
+    });
+
+    it('should not validate form on \'tab\'', () => {
+
+        // Arrange
+        TestUtils.setBodyHtml(`<form>
+                                    <input required value="test" />
+                                    <button type="submit">submit</button>
+                                </form>`);
+        const form = document.querySelector('form');
+        const input = form.querySelector('input');
+        new FormValidation(form); // eslint-disable-line no-new
+
+        // Act
+        const event = new KeyboardEvent('keydown', {
+            which: 9
+        });
+        input.dispatchEvent(event);
+
+        // Assert
+        const html = TestUtils.getBodyHtml();
+        expect(html).toMatchSnapshot();
+
+    });
+
+});
+
 describe('adding custom validation', () => {
 
     it('should throw error when addCustomValidation is called, but name argument is not supplied', () => {
