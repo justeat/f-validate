@@ -5,7 +5,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 v0.15.0
 ------------------------------
-*March 7, 2018*
+*March 8, 2018*
 
 ### Added
 - Improved accessibility by allowing a user to validate the form on pressing enter.
