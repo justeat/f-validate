@@ -270,9 +270,7 @@ export default class FormValidation {
     findGroupedErrorElement () {
         const groupedErrorElement = $.first(`.${CONSTANTS.cssClasses.formErrors}`, this.form);
 
-        return groupedErrorElement
-            ? groupedErrorElement
-            : false;
+        return groupedErrorElement;
     }
 
     displayGroupedMessages (groupedErrorElement) {
