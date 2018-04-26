@@ -7,12 +7,6 @@ exports[`validateOn blur should not run validation on other fields 1`] = `
                                     </form>"
 `;
 
-exports[`validateOn blur should not validate if field is empty 1`] = `
-"<form novalidate=\\"\\" class=\\"has-success\\">
-                                        <input required=\\"\\">
-                                    </form>"
-`;
-
 exports[`validateOn blur should set form state to invalid, as first select has been touched and no option selected 1`] = `
 "<form novalidate=\\"\\" class=\\"has-error\\">
                                 <div data-val-group=\\"\\" data-val-dateinfuture=\\"\\" class=\\"has-error\\">
@@ -73,15 +67,21 @@ exports[`validateOn blur should set form state to valid, as second select has no
                             </form>"
 `;
 
+exports[`validateOn blur should validate if field is empty 1`] = `
+"<form novalidate=\\"\\" class=\\"has-error\\">
+                                        <input required=\\"\\" class=\\"has-error\\"><p class=\\"form-error\\">This field is required.</p>
+                                    </form>"
+`;
+
 exports[`validateOn blur should validate valid form 1`] = `
 "<form novalidate=\\"\\" class=\\"has-success\\">
                                         <input required=\\"\\" value=\\"x\\" class=\\"has-success\\">
                                     </form>"
 `;
 
-exports[`validateOn keyup should not validate if field is empty 1`] = `
-"<form novalidate=\\"\\" class=\\"has-success\\">
-                                        <input required=\\"\\">
+exports[`validateOn keyup should validate if field is empty 1`] = `
+"<form novalidate=\\"\\" class=\\"has-error\\">
+                                        <input required=\\"\\" class=\\"has-error\\"><p class=\\"form-error\\">This field is required.</p>
                                     </form>"
 `;
 

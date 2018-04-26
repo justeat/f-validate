@@ -25,7 +25,7 @@ describe('validateOn', () => {
 
     describe('blur', () => {
 
-        it('should not validate if field is empty', () => {
+        it('should validate if field is empty', () => {
 
             // Arrange
             TestUtils.setBodyHtml(`<form>
@@ -239,7 +239,7 @@ describe('validateOn', () => {
 
     describe('keyup', () => {
 
-        it('should not validate if field is empty', () => {
+        it('should validate if field is empty', () => {
 
             // Arrange
             TestUtils.setBodyHtml(`<form>
