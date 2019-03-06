@@ -42,4 +42,80 @@ describe('hybridMode', () => {
         }).toThrowError('f-validate: hybridMode cannot be used if errors are grouped');
 
     });
+
+    it('should not validate on keydown before initial blur', () => {
+
+        // Arrange
+        TestUtils.setBodyHtml(`<form>
+                                    <input type="email" name="email" />
+                                </form>`);
+        const form = document.querySelector('form');
+        const input = form.querySelector('input');
+
+        // eslint-disable-next-line no-new
+        new FormValidation(form, {
+            hybridMode: true
+        });
+
+        // Act
+        input.value = 'not-a-valid-email';
+        TestUtils.dispatchEvent(input, 'keydown');
+
+        // Assert
+        const html = TestUtils.getBodyHtml();
+        expect(html).toMatchSnapshot();
+
+    });
+
+    it('should validate on keydown after initial blur', () => {
+
+        // Arrange
+        TestUtils.setBodyHtml(`<form>
+                                    <input type="email" name="email" />
+                                </form>`);
+        const form = document.querySelector('form');
+        const input = form.querySelector('input');
+
+        // eslint-disable-next-line no-new
+        new FormValidation(form, {
+            hybridMode: true
+        });
+
+        // Act
+        input.value = 'not-a-valid-email';
+        TestUtils.dispatchEvent(input, 'keydown');
+        TestUtils.dispatchEvent(input, 'blur');
+        TestUtils.dispatchEvent(input, 'keydown');
+
+        // Assert
+        const html = TestUtils.getBodyHtml();
+        expect(html).toMatchSnapshot();
+
+    });
+
+    it('should validate on form submit', () => {
+
+        // Arrange
+        TestUtils.setBodyHtml(`<form>
+                                    <input type="text" required />
+                                    <input type="email" name="email" />
+                                </form>`);
+        const form = document.querySelector('form');
+        const inputEmail = form.querySelector('input[type=email]');
+
+        // eslint-disable-next-line no-new
+        new FormValidation(form, {
+            hybridMode: true
+        });
+
+        // Act
+        inputEmail.value = 'not-a-valid-email';
+        TestUtils.dispatchEvent(inputEmail, 'blur');
+        TestUtils.dispatchEvent(form, 'submit');
+
+        // Assert
+        const html = TestUtils.getBodyHtml();
+        expect(html).toMatchSnapshot();
+    });
+
 });

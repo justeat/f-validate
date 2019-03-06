@@ -375,6 +375,7 @@ export default class FormValidation {
             throw new Error('f-validate: hybridMode cannot be used with the validateOn option');
         }
 
+        // 'hybridMode' listens to both keyup and blur events, delaying validation until the first blur event
         this.fields.forEach(field => {
             field.addEventListener('blur', this.isValid.bind(this, null, { field }, 'blur'));
             field.addEventListener('blur', this.markFieldAsBlurred.bind(this, field));
