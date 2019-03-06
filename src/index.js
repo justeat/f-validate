@@ -34,7 +34,8 @@ export const defaultOptions = {
     successClass: CONSTANTS.cssClasses.hasSuccess,
     focus: false,
     groupErrorPlacement: false,
-    enableHTML5Validation: false
+    enableHTML5Validation: false,
+    hybridMode: false
 };
 
 const getForm = descriptor => {
@@ -95,6 +96,9 @@ export default class FormValidation {
         if (this.options.validateOn) {
             this.validateOn();
         }
+        if (this.options.hybridMode) {
+            this.setupHybridValidate();
+        }
 
         this.setFormNoValidate();
         this.form.addEventListener('submit', this.isValid.bind(this));
@@ -150,7 +154,7 @@ export default class FormValidation {
      * @param {object} currentElement
      * @returns {boolean}
      */
-    isValid (event, currentElement) {
+    isValid (event, currentElement, eventType) {
 
         let formValid = true;
         this.errorMessages = [];
@@ -160,6 +164,11 @@ export default class FormValidation {
             // currentElement refers to an element that is being validated on blur/keyup
             // only validate on blur/keyup if the field is not empty and is not required
             if (currentElement && (currentElement.field !== field || (field.value === '' && !testDefinitions.required.condition(field)))) {
+                return;
+            }
+
+            // if hybrid validation is active, give the user a chance to input a value before we start validating
+            if (this.options.hybridMode && currentElement && eventType === 'keyup' && !field.hasAttribute(CONSTANTS.blurredAttr)) {
                 return;
             }
 
@@ -348,6 +357,28 @@ export default class FormValidation {
                 // Null is being passed as the isValid method expects 'field' as its second argument
                 field.addEventListener(this.options.validateOn, this.isValid.bind(this, null, { field }));
             }
+        });
+    }
+
+    markFieldAsBlurred (field) {
+        if (!field.hasAttribute(CONSTANTS.blurredAttr)) {
+            field.setAttribute(CONSTANTS.blurredAttr, '');
+        }
+    }
+
+    setupHybridValidate () {
+        if (this.options.groupErrorPlacement) {
+            throw new Error('f-validate: hybridMode cannot be used if errors are grouped');
+        }
+
+        if (this.options.validateOn) {
+            throw new Error('f-validate: hybridMode cannot be used with the validateOn option');
+        }
+
+        this.fields.forEach(field => {
+            field.addEventListener('blur', this.isValid.bind(this, null, { field }, 'blur'));
+            field.addEventListener('blur', this.markFieldAsBlurred.bind(this, field));
+            field.addEventListener('keyup', this.isValid.bind(this, null, { field }, 'keyup'));
         });
     }
 
