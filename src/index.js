@@ -35,7 +35,7 @@ export const defaultOptions = {
     focus: false,
     groupErrorPlacement: false,
     enableHTML5Validation: false,
-    hybridMode: false
+    hybridMode: false // setups both onblur and onkeydown events
 };
 
 const getForm = descriptor => {
@@ -366,6 +366,15 @@ export default class FormValidation {
         }
     }
 
+    /**
+     * Validates form field(s) on both blur and keyup events.
+     * Initial validate is delayed until user blurs to avoid untimely validation errors.
+     *
+     * example:
+     *       this.validation = new FormValidation(this.form, {
+     *           hybridMode: true
+     *       });
+     */
     setupHybridValidate () {
         if (this.options.groupErrorPlacement) {
             throw new Error('f-validate: hybridMode cannot be used if errors are grouped');
