@@ -43,6 +43,33 @@ describe('hybridMode', () => {
 
     });
 
+    it('should bind events if configuration is valid', () => {
+
+        // Arrange
+        TestUtils.setBodyHtml(`<form><input required value="x"></form>`);
+        const form = document.querySelector('form');
+        const input = form.querySelector('input');
+
+        const isValidSpy = jest.fn();
+        const markFieldAsBlurredSpy = jest.fn();
+
+        const validation = new FormValidation(form, {
+            hybridMode: true
+        });
+
+        validation.isValid = isValidSpy;
+        validation.markFieldAsBlurred = markFieldAsBlurredSpy;
+        validation.setupHybridValidate(); // need to re-run setup as functions have changed
+
+        // Act
+        TestUtils.dispatchEvent(input, 'keydown');
+        TestUtils.dispatchEvent(input, 'blur');
+
+        // Assert
+        expect(isValidSpy.mock.calls.length).toBe(1);
+        expect(markFieldAsBlurredSpy.mock.calls.length).toBe(1);
+    });
+
     it('should not validate on keydown before initial blur', () => {
 
         // Arrange
