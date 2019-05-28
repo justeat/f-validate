@@ -3650,9 +3650,9 @@ doctrine@^2.1.0:
   dependencies:
     esutils "^2.0.2"
 
-dom-buddy@2.3.0:
-  version "2.3.0"
-  resolved "https://registry.yarnpkg.com/dom-buddy/-/dom-buddy-2.3.0.tgz#e287ba86f4b905283f6095bdd66bdbce70346bc0"
+dom-buddy@2.4.0:
+  version "2.4.0"
+  resolved "https://registry.yarnpkg.com/dom-buddy/-/dom-buddy-2.4.0.tgz#ab3a1406e811b0c86bdc5e5d5824777240e25268"
 
 dom-serializer@0, dom-serializer@~0.1.0:
   version "0.1.0"
@@ -7259,11 +7259,11 @@ js-base64@^2.1.8, js-base64@^2.1.9:
   version "2.4.0"
   resolved "https://registry.yarnpkg.com/js-base64/-/js-base64-2.4.0.tgz#9e566fee624751a1d720c966cd6226d29d4025aa"
 
-js-test-buddy@^0.1.0:
-  version "0.1.0"
-  resolved "https://registry.yarnpkg.com/js-test-buddy/-/js-test-buddy-0.1.0.tgz#0c3619cf35e52d86261e19413a6f188dd21d8915"
+js-test-buddy@^0.2.0:
+  version "0.2.0"
+  resolved "https://registry.yarnpkg.com/js-test-buddy/-/js-test-buddy-0.2.0.tgz#45b957073182148fd5f71aa21261fed11dc74788"
   dependencies:
-    dom-buddy "2.3.0"
+    dom-buddy "2.4.0"
 
 js-tokens@^3.0.0, js-tokens@^3.0.2:
   version "3.0.2"

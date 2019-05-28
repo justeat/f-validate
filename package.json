@@ -32,7 +32,7 @@
     "coveralls": "^3.0.1",
     "danger": "^3.7.18",
     "gulp": "^3.9.1",
-    "js-test-buddy": "^0.1.0"
+    "js-test-buddy": "^0.2.0"
   },
   "keywords": [
     "fozzie"
