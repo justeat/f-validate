@@ -46,11 +46,11 @@
     glob "^7.1.2"
     mkdirp "^0.5.1"
 
-"@justeat/f-dom@^0.4.0":
-  version "0.4.0"
-  resolved "https://registry.yarnpkg.com/@justeat/f-dom/-/f-dom-0.4.0.tgz#3e838a2dd06d4d5281c17f5fb9f66d7485fd759a"
+"@justeat/f-dom@^1.1.0":
+  version "1.1.0"
+  resolved "https://registry.yarnpkg.com/@justeat/f-dom/-/f-dom-1.1.0.tgz#491ba78240ab73a3c4687d93eb8004415fe8a9c7"
   dependencies:
-    qwery "^4.0.0"
+    qwery "4.0.0"
 
 "@justeat/f-templates-loader@0.0.4":
   version "0.0.4"
@@ -10106,7 +10106,7 @@ quick-lru@^1.0.0:
   version "1.1.0"
   resolved "https://registry.yarnpkg.com/quick-lru/-/quick-lru-1.1.0.tgz#4360b17c61136ad38078397ff11416e186dcfbb8"
 
-qwery@^4.0.0:
+qwery@4.0.0:
   version "4.0.0"
   resolved "https://registry.yarnpkg.com/qwery/-/qwery-4.0.0.tgz#7d21e3b4f7e9eed7e68728f4dab4de8b7303febe"
 

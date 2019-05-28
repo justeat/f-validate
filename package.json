@@ -22,7 +22,7 @@
     "node": ">=4.0.0"
   },
   "dependencies": {
-    "@justeat/f-dom": "^0.4.0"
+    "@justeat/f-dom": "^1.1.0"
   },
   "devDependencies": {
     "@justeat/gulp-build-fozzie": "^7.19.0",
