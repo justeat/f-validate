@@ -30,7 +30,7 @@
     "babel-preset-env": "^1.7.0",
     "concurrently": "^3.5.1",
     "coveralls": "^3.0.1",
-    "danger": "^3.7.18",
+    "danger": "^7.1.4",
     "gulp": "^3.9.1",
     "js-test-buddy": "^0.1.0"
   },
