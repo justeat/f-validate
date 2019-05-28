@@ -864,8 +864,8 @@ assets@^3.0.0:
     mime "^1.4.0"
 
 assign-deep@^0.4.3:
-  version "0.4.6"
-  resolved "https://registry.yarnpkg.com/assign-deep/-/assign-deep-0.4.6.tgz#2192a989354843093a03eff941c9473a9bc58a1d"
+  version "0.4.7"
+  resolved "https://registry.yarnpkg.com/assign-deep/-/assign-deep-0.4.7.tgz#7f66886a0bdae6d652abb1497f6edfc2c7ab14cf"
   dependencies:
     assign-symbols "^0.1.1"
     is-primitive "^2.0.0"
