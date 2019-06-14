@@ -11,7 +11,6 @@ export default {
     condition: field => field.hasAttribute('data-val-dateInFuture'),
 
     test: element => {
-
         const dateToday = new Date();
         const currentMonth = dateToday.getMonth() + 1;
         const currentYear = dateToday.getFullYear();
@@ -26,7 +25,6 @@ export default {
         }
 
         return selectedYearVal === currentYear && selectedMonthVal >= currentMonth;
-
     },
 
     touchedSelectors: ['[data-val-dateInFuture-type="month"]', '[data-val-dateInFuture-type="year"]'],

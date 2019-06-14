@@ -3,9 +3,7 @@ import FormValidation from '../../src';
 
 
 describe('matches fields', () => {
-
     it('should return invalid for a field with "equalto" attribute, that does not match the value of specified field', () => {
-
         // Arrange
         TestUtils.setBodyHtml(`<form>
                 <input data-val-equalto="matchedField" value="match" />
@@ -19,11 +17,9 @@ describe('matches fields', () => {
 
         // Assert
         expect(isFormValid).toBe(false);
-
     });
 
     it('should return invalid for a field with "equalto" attribute, but a field is not specified in that attribute', () => {
-
         // Arrange
         TestUtils.setBodyHtml(`<form>
                 <input data-val-equalto value="match" />
@@ -37,11 +33,9 @@ describe('matches fields', () => {
 
         // Assert
         expect(isFormValid).toBe(false);
-
     });
 
     it('should return invalid for a field with "equalto" attribute, but the field specified does not exist', () => {
-
         // Arrange
         TestUtils.setBodyHtml(`<form>
                 <input data-val-equalto="matchedField" value="match" />
@@ -54,11 +48,9 @@ describe('matches fields', () => {
 
         // Assert
         expect(isFormValid).toBe(false);
-
     });
 
     it('should return valid for an input field with "equalto" attribute, that does match the value of specified field', () => {
-
         // Arrange
         TestUtils.setBodyHtml(`<form>
                 <input data-val-equalto="matchedField" value="match" />
@@ -72,7 +64,5 @@ describe('matches fields', () => {
 
         // Assert
         expect(isFormValid).toBe(true);
-
     });
-
 });

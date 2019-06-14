@@ -23,7 +23,6 @@ export const getInlineErrorElement = (field, form) => {
     }
 
     if (nextSibling && nextSibling.classList.contains(CONSTANTS.cssClasses.formError)) {
-
         return nextSibling;
     }
 
@@ -31,7 +30,6 @@ export const getInlineErrorElement = (field, form) => {
 };
 
 export const displayInlineMessage = (errorElement, customMessage, field, form) => {
-
     let updateElement = errorElement;
     const customErrorEl = getCustomErrorElement(field, form) || field;
 
@@ -43,7 +41,6 @@ export const displayInlineMessage = (errorElement, customMessage, field, form) =
 
     updateElement.textContent = customMessage;
     updateElement.classList.remove(CONSTANTS.cssClasses.isHidden);
-
 };
 
 export const hideMessage = errorElement => {
@@ -53,11 +50,9 @@ export const hideMessage = errorElement => {
 
     errorElement.classList.add(CONSTANTS.cssClasses.isHidden);
     errorElement.innerHTML = '';
-
 };
 
 const getDefaultMessage = (field, ruleName) => {
-
     if (!testDefinitions[ruleName].defaultMessageValue) {
         return testDefinitions[ruleName].defaultMessage;
     }
