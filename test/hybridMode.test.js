@@ -2,9 +2,7 @@ import TestUtils from 'js-test-buddy';
 import FormValidation from '../src';
 
 describe('hybridMode', () => {
-
     it('should throw error if hyrbid mode is used with a validateOn event', () => {
-
         // Arrange
         TestUtils.setBodyHtml(`<form>
                                         <input required value="x" />
@@ -20,11 +18,9 @@ describe('hybridMode', () => {
                 validateOn: 'blur'
             });
         }).toThrowError('f-validate: hybridMode cannot be used with the validateOn option');
-
     });
 
     it('should throw error if hyrbid mode is used with grouped errors', () => {
-
         // Arrange
         TestUtils.setBodyHtml(`<form>
                                         <input required value="x" />
@@ -40,11 +36,9 @@ describe('hybridMode', () => {
                 groupErrorPlacement: true
             });
         }).toThrowError('f-validate: hybridMode cannot be used if errors are grouped');
-
     });
 
     it('should bind events if configuration is valid', () => {
-
         // Arrange
         TestUtils.setBodyHtml('<form><input required value="x"></form>');
         const form = document.querySelector('form');
@@ -71,7 +65,6 @@ describe('hybridMode', () => {
     });
 
     it('should not validate on keydown before initial blur', () => {
-
         // Arrange
         TestUtils.setBodyHtml(`<form>
                                     <input type="email" name="email" />
@@ -91,11 +84,9 @@ describe('hybridMode', () => {
         // Assert
         const html = TestUtils.getBodyHtml();
         expect(html).toMatchSnapshot();
-
     });
 
     it('should validate on keydown after initial blur', () => {
-
         // Arrange
         TestUtils.setBodyHtml(`<form>
                                     <input type="email" name="email" />
@@ -117,11 +108,9 @@ describe('hybridMode', () => {
         // Assert
         const html = TestUtils.getBodyHtml();
         expect(html).toMatchSnapshot();
-
     });
 
     it('should validate on form submit', () => {
-
         // Arrange
         TestUtils.setBodyHtml(`<form>
                                     <input type="text" required />
@@ -144,5 +133,4 @@ describe('hybridMode', () => {
         const html = TestUtils.getBodyHtml();
         expect(html).toMatchSnapshot();
     });
-
 });

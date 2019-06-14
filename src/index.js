@@ -39,7 +39,6 @@ export const defaultOptions = {
 };
 
 const getForm = descriptor => {
-
     if (!descriptor) {
         throw new Error('f-validate: expected form name or form node parameter');
     }
@@ -52,11 +51,9 @@ const getForm = descriptor => {
     }
 
     return form;
-
 };
 
 const elementsUntouched = (element, current, touchedSelectors) => {
-
     const notInErrorState = !current.field.classList.contains(CONSTANTS.cssClasses.hasError);
     const elementsNotTouched = touchedSelectors
         .map(childSelector => $.first(childSelector, element))
@@ -64,13 +61,11 @@ const elementsUntouched = (element, current, touchedSelectors) => {
 
     // If one select has not been interacted with do not run test method
     return notInErrorState && elementsNotTouched.length > 0;
-
 };
 
 export default class FormValidation {
-
     constructor (nameOrNode, options = {}) {
-        this.options = Object.assign({}, defaultOptions, options);
+        this.options = { ...defaultOptions, ...options };
         this.form = getForm(nameOrNode);
         this.fields = this.getFields();
 
@@ -119,7 +114,6 @@ export default class FormValidation {
      *      });
      */
     on (callBackEvent, callBack) {
-
         if (!this.callBacks[callBackEvent]) {
             this.callBacks[callBackEvent] = [];
         }
@@ -129,7 +123,6 @@ export default class FormValidation {
         } catch (exception) {
             throw new TypeError(`f-validate: ${callBackEvent} callback must be a function`);
         }
-
     }
 
     setSuccess (element) {
@@ -143,11 +136,9 @@ export default class FormValidation {
     }
 
     setFormNoValidate () {
-
         if (!this.options.enableHTML5Validation) {
             this.form.setAttribute('novalidate', '');
         }
-
     }
 
     /**
@@ -158,12 +149,10 @@ export default class FormValidation {
      * @returns {boolean}
      */
     isValid (event, currentElement, eventType) {
-
         let formValid = true;
         this.errorMessages = [];
 
         this.fields.forEach(field => {
-
             // currentElement refers to an element that is being validated on blur/keyup
             // only validate on blur/keyup if the field is not empty and is not required
             if (currentElement && (currentElement.field !== field || (field.value === '' && !testDefinitions.required.condition(field)))) {
@@ -208,11 +197,9 @@ export default class FormValidation {
                         runCallbacks(this.callBacks.elementError, field, ruleName);
                     }
                 }
-
             });
 
             if (fieldHasValidation) {
-
                 if (fieldValid) {
                     this.setSuccess(field);
                 } else {
@@ -229,9 +216,7 @@ export default class FormValidation {
                         displayInlineMessage(errorElement, errorMessage, field, this.form);
                     }
                 }
-
             }
-
         });
 
         if (!formValid) {
@@ -256,7 +241,6 @@ export default class FormValidation {
         }
 
         return formValid;
-
     }
 
     addCustomValidation (name, handler) {
@@ -288,7 +272,6 @@ export default class FormValidation {
     }
 
     displayGroupedMessages (groupedErrorElement) {
-
         let updateElement = groupedErrorElement;
 
         if (!groupedErrorElement) {
@@ -296,7 +279,6 @@ export default class FormValidation {
             updateElement.classList.add(CONSTANTS.cssClasses.formErrors);
 
             this.form.insertBefore(updateElement, this.getGroupedErrorPosition());
-
         } else {
             groupedErrorElement.innerHTML = '';
         }
@@ -309,7 +291,6 @@ export default class FormValidation {
     }
 
     getGroupedErrorPosition () {
-
         const groupElement = $.first(this.options.groupErrorPlacement, this.form);
 
         if (groupElement) {
@@ -321,7 +302,6 @@ export default class FormValidation {
         }
 
         return this.form.firstChild;
-
     }
 
     /**
@@ -333,7 +313,6 @@ export default class FormValidation {
      *       });
      */
     validateOn () {
-
         if (this.options.groupErrorPlacement) {
             throw new Error('f-validate: validation on \'blur\' or \'keyup\' cannot be performed if errors are grouped');
         }
@@ -344,20 +323,18 @@ export default class FormValidation {
 
         this.fields.forEach(field => {
             if (field.hasAttribute(CONSTANTS.validationGroup)) {
-                $(CONSTANTS.fieldValues, field).forEach(childField =>
+                $(CONSTANTS.fieldValues, field).forEach(childField => childField.addEventListener(
 
                     // Binds each form element within a validation-group to the specified event.
                     // When this event is triggered the validation-group element will be passed as the element to test.
                     // The child field is also passed for use within a rule test method
                     // Null is being passed as the isValid method expects 'field' as its second argument
-                    childField.addEventListener(this.options.validateOn,
-                        this.isValid.bind(this, null, {
-                            field,
-                            childField
-                        })
-                    )
-                );
-
+                    this.options.validateOn,
+                    this.isValid.bind(this, null, {
+                        field,
+                        childField
+                    })
+                ));
             } else {
                 // Null is being passed as the isValid method expects 'field' as its second argument
                 field.addEventListener(this.options.validateOn, this.isValid.bind(this, null, { field }));
@@ -365,6 +342,7 @@ export default class FormValidation {
         });
     }
 
+    // eslint-disable-next-line class-methods-use-this
     markFieldAsBlurred (field) {
         if (!field.hasAttribute(CONSTANTS.blurredAttr)) {
             field.setAttribute(CONSTANTS.blurredAttr, '');
@@ -396,5 +374,4 @@ export default class FormValidation {
             field.addEventListener('keyup', this.isValid.bind(this, null, { field }, 'keyup'));
         });
     }
-
 }

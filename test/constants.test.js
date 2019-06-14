@@ -1,15 +1,12 @@
 import CONSTANTS from '../src/constants';
 
 describe('CONSTANTS', () => {
-
     it('should contain component classes', () => {
-
         expect(CONSTANTS.cssClasses).toHaveProperty('isHidden', 'is-hidden');
         expect(CONSTANTS.cssClasses).toHaveProperty('formError', 'form-error');
         expect(CONSTANTS.cssClasses).toHaveProperty('formErrors', 'form-errors');
         expect(CONSTANTS.cssClasses).toHaveProperty('hasError', 'has-error');
         expect(CONSTANTS.cssClasses).toHaveProperty('hasSuccess', 'has-success');
-
     });
 
     it('should contain email regex', () => {
@@ -37,5 +34,4 @@ describe('CONSTANTS', () => {
         expect(CONSTANTS.validateOnOptions).toContain('blur');
         expect(CONSTANTS.validateOnOptions).toContain('keyup');
     });
-
 });

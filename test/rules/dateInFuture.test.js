@@ -3,12 +3,10 @@ import FormValidation from '../../src';
 import stubDate from '../helpers/stubDate';
 
 describe('dateInFuture validation rules', () => {
-
     // Represents the current date to test against
     stubDate('Oct 16, 2018');
 
     it('should return invalid if both year and month are untouched', () => {
-
         // Arrange
         TestUtils.setBodyHtml(`<form>
                                 <div data-val-group
@@ -32,11 +30,9 @@ describe('dateInFuture validation rules', () => {
 
         // Assert
         expect(isFormValid).toBe(false);
-
     });
 
     it('should return valid if year selected is beyond current year', () => {
-
         // Arrange
         TestUtils.setBodyHtml(`<form>
                                 <div data-val-group
@@ -62,11 +58,9 @@ describe('dateInFuture validation rules', () => {
 
         // Assert
         expect(isFormValid).toBe(true);
-
     });
 
     it('should return valid if year selected is current year, and month is current month', () => {
-
         // Arrange
         TestUtils.setBodyHtml(`<form>
                                     <div data-val-group
@@ -92,11 +86,9 @@ describe('dateInFuture validation rules', () => {
 
         // Assert
         expect(isFormValid).toBe(true);
-
     });
 
     it('should return valid if year selected is current year, and month selected is future month', () => {
-
         // Arrange
         TestUtils.setBodyHtml(`<form>
                                     <div data-val-group
@@ -122,11 +114,9 @@ describe('dateInFuture validation rules', () => {
 
         // Assert
         expect(isFormValid).toBe(true);
-
     });
 
     it('should return invalid if year selected is current year, and month selected is previous month', () => {
-
         // Arrange
         TestUtils.setBodyHtml(`<form>
                                 <div data-val-group
@@ -152,11 +142,9 @@ describe('dateInFuture validation rules', () => {
 
         // Assert
         expect(isFormValid).toBe(false);
-
     });
 
     it('should return false if year selected is next year, and month is untouched', () => {
-
         // Arrange
         TestUtils.setBodyHtml(`<form>
                                 <div data-val-group
@@ -181,7 +169,5 @@ describe('dateInFuture validation rules', () => {
 
         // Assert
         expect(isFormValid).toBe(false);
-
     });
-
 });

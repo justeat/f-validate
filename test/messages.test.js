@@ -1,12 +1,11 @@
 import TestUtils from 'js-test-buddy';
-import { getInlineErrorElement, displayInlineMessage, hideMessage, getMessage } from '../src/messages';
+import {
+    getInlineErrorElement, displayInlineMessage, hideMessage, getMessage
+} from '../src/messages';
 
 describe('messages', () => {
-
     describe('getInlineErrorElement', () => {
-
         it('should return error if element exists', () => {
-
             // Arrange
             TestUtils.setBodyHtml('<input /><p class="form-error">error message</p>');
             const input = document.querySelector('input');
@@ -17,11 +16,9 @@ describe('messages', () => {
 
             // Assert
             expect(result).toEqual(error);
-
         });
 
         it('should return false if element does not exist', () => {
-
             // Arrange
             TestUtils.setBodyHtml('<input />');
             const input = document.querySelector('input');
@@ -31,15 +28,11 @@ describe('messages', () => {
 
             // Assert
             expect(result).toEqual(false);
-
         });
-
     });
 
     describe('displayInlineMessage', () => {
-
         it('should create a new element if it does not exist, and assign error', () => {
-
             // Arrange
             TestUtils.setBodyHtml('<input />');
             const input = document.querySelector('input');
@@ -52,11 +45,9 @@ describe('messages', () => {
             // Assert
             const html = TestUtils.getBodyHtml();
             expect(html).toMatchSnapshot();
-
         });
 
         it('should assign error to existing element', () => {
-
             // Arrange
             TestUtils.setBodyHtml('<input /><p class="form-error">error message</p>');
             const input = document.querySelector('input');
@@ -69,12 +60,10 @@ describe('messages', () => {
             // Assert
             const html = TestUtils.getBodyHtml();
             expect(html).toMatchSnapshot();
-
         });
 
 
         it('should create a new element and position after requested element', () => {
-
             // Arrange
             TestUtils.setBodyHtml(`<form>
                     <input data-val-error-placement="arbitrary-element" />
@@ -91,14 +80,11 @@ describe('messages', () => {
             // Assert
             const html = TestUtils.getBodyHtml();
             expect(html).toMatchSnapshot();
-
         });
     });
 
     describe('hideMessage', () => {
-
         it('should add hidden class and remove content if element exists', () => {
-
             // Arrange
             TestUtils.setBodyHtml('<p class="form-error">error message</p>');
             const error = document.querySelector('p');
@@ -109,15 +95,11 @@ describe('messages', () => {
             // Assert
             const html = TestUtils.getBodyHtml();
             expect(html).toMatchSnapshot();
-
         });
-
     });
 
     describe('getMessage', () => {
-
         it('should return custom error message if data attr exists', () => {
-
             // Arrange
             TestUtils.setBodyHtml('<input data-val-maxlength-error="maxlength error message" />');
             const input = document.querySelector('input');
@@ -128,8 +110,6 @@ describe('messages', () => {
 
             // Assert
             expect(result).toEqual('maxlength error message');
-
         });
-
     });
 });
