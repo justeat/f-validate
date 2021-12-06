@@ -2,7 +2,7 @@
 
 exports[`error messages by default should apply error class to an invalid field 1`] = `
 "<form novalidate=\\"\\" class=\\"has-error\\">
-                                    <input required=\\"\\" class=\\"has-error\\"><p class=\\"form-error\\">This field is required.</p>
+                                    <input required=\\"\\" class=\\"has-error\\" aria-describedby=\\"error_fxcmgj\\"><p class=\\"form-error\\" role=\\"alert\\" id=\\"error_fxcmgj\\">This field is required.</p>
                                 </form>"
 `;
 
@@ -14,25 +14,25 @@ exports[`error messages by default should not apply error class to a valid field
 
 exports[`error messages by default should remove the error message if a previously invalid field is now valid 1`] = `
 "<form novalidate=\\"\\" class=\\"has-error\\">
-                                        <input required=\\"\\" class=\\"has-error\\"><p class=\\"form-error\\">This field is required.</p>
+                                        <input required=\\"\\" class=\\"has-error\\" aria-describedby=\\"error_fxcmgj\\"><p class=\\"form-error\\" role=\\"alert\\" id=\\"error_fxcmgj\\">This field is required.</p>
                                     </form>"
 `;
 
 exports[`error messages by default should remove the error message if a previously invalid field is now valid 2`] = `
 "<form novalidate=\\"\\" class=\\"has-success\\">
-                                        <input required=\\"\\" class=\\"has-success\\"><p class=\\"form-error is-hidden\\"></p>
+                                        <input required=\\"\\" class=\\"has-success\\" aria-describedby=\\"error_fxcmgj\\"><p class=\\"form-error is-hidden\\" role=\\"alert\\" id=\\"error_fxcmgj\\"></p>
                                     </form>"
 `;
 
 exports[`error messages by default should replace the existing error message when validating multiple times 1`] = `
 "<form novalidate=\\"\\" class=\\"has-error\\">
-                                    <input required=\\"\\" maxlength=\\"3\\" class=\\"has-error\\"><p class=\\"form-error\\">This field is required.</p>
+                                    <input required=\\"\\" maxlength=\\"3\\" class=\\"has-error\\" aria-describedby=\\"error_fxcmgj\\"><p class=\\"form-error\\" role=\\"alert\\" id=\\"error_fxcmgj\\">This field is required.</p>
                                 </form>"
 `;
 
 exports[`error messages by default should replace the existing error message when validating multiple times 2`] = `
 "<form novalidate=\\"\\" class=\\"has-error\\">
-                                    <input required=\\"\\" maxlength=\\"3\\" class=\\"has-error\\"><p class=\\"form-error\\">This field must not exceed 3 characters in length.</p>
+                                    <input required=\\"\\" maxlength=\\"3\\" class=\\"has-error\\" aria-describedby=\\"error_fxcmgj\\"><p class=\\"form-error\\" role=\\"alert\\" id=\\"error_fxcmgj\\">This field must not exceed 3 characters in length.</p>
                                 </form>"
 `;
 
@@ -111,7 +111,7 @@ exports[`error messages when set to display as a group should replace existing e
 
 exports[`error messages with a custom message defined should apply error class to an invalid field 1`] = `
 "<form novalidate=\\"\\" class=\\"has-error\\">
-                                    <input required=\\"\\" data-val-required-error=\\"custom required error message\\" class=\\"has-error\\"><p class=\\"form-error\\">custom required error message</p>
+                                    <input required=\\"\\" data-val-required-error=\\"custom required error message\\" class=\\"has-error\\" aria-describedby=\\"error_fxcmgj\\"><p class=\\"form-error\\" role=\\"alert\\" id=\\"error_fxcmgj\\">custom required error message</p>
                                 </form>"
 `;
 
@@ -123,39 +123,39 @@ exports[`error messages with a custom message defined should not apply error cla
 
 exports[`error messages with a custom message defined should remove the error message if a previously invalid field is now valid 1`] = `
 "<form novalidate=\\"\\" class=\\"has-error\\">
-                                        <input required=\\"\\" data-val-required-error=\\"custom required error message\\" class=\\"has-error\\"><p class=\\"form-error\\">custom required error message</p>
+                                        <input required=\\"\\" data-val-required-error=\\"custom required error message\\" class=\\"has-error\\" aria-describedby=\\"error_fxcmgj\\"><p class=\\"form-error\\" role=\\"alert\\" id=\\"error_fxcmgj\\">custom required error message</p>
                                     </form>"
 `;
 
 exports[`error messages with a custom message defined should remove the error message if a previously invalid field is now valid 2`] = `
 "<form novalidate=\\"\\" class=\\"has-success\\">
-                                        <input required=\\"\\" data-val-required-error=\\"custom required error message\\" class=\\"has-success\\"><p class=\\"form-error is-hidden\\"></p>
+                                        <input required=\\"\\" data-val-required-error=\\"custom required error message\\" class=\\"has-success\\" aria-describedby=\\"error_fxcmgj\\"><p class=\\"form-error is-hidden\\" role=\\"alert\\" id=\\"error_fxcmgj\\"></p>
                                     </form>"
 `;
 
 exports[`error messages with a custom message defined should replace the existing error message when validating multiple times 1`] = `
 "<form novalidate=\\"\\" class=\\"has-error\\">
-                                    <input required=\\"\\" maxlength=\\"3\\" data-val-required-error=\\"custom required error message\\" data-val-maxlength-error=\\"custom maxlength error message\\" class=\\"has-error\\"><p class=\\"form-error\\">custom required error message</p>
+                                    <input required=\\"\\" maxlength=\\"3\\" data-val-required-error=\\"custom required error message\\" data-val-maxlength-error=\\"custom maxlength error message\\" class=\\"has-error\\" aria-describedby=\\"error_fxcmgj\\"><p class=\\"form-error\\" role=\\"alert\\" id=\\"error_fxcmgj\\">custom required error message</p>
                                 </form>"
 `;
 
 exports[`error messages with a custom message defined should replace the existing error message when validating multiple times 2`] = `
 "<form novalidate=\\"\\" class=\\"has-error\\">
-                                    <input required=\\"\\" maxlength=\\"3\\" data-val-required-error=\\"custom required error message\\" data-val-maxlength-error=\\"custom maxlength error message\\" class=\\"has-error\\"><p class=\\"form-error\\">custom maxlength error message</p>
+                                    <input required=\\"\\" maxlength=\\"3\\" data-val-required-error=\\"custom required error message\\" data-val-maxlength-error=\\"custom maxlength error message\\" class=\\"has-error\\" aria-describedby=\\"error_fxcmgj\\"><p class=\\"form-error\\" role=\\"alert\\" id=\\"error_fxcmgj\\">custom maxlength error message</p>
                                 </form>"
 `;
 
 exports[`error messages with custom positioning set on field should display the error message directly adjacent to the specified element 1`] = `
 "<form novalidate=\\"\\" class=\\"has-error\\">
-                                        <input required=\\"\\" class=\\"has-error\\"><p class=\\"form-error\\">This field is required.</p>
-                                        <input required=\\"\\" data-val-error-placement=\\".arbitrary-element\\" class=\\"has-error\\">
-                                        <span class=\\"arbitrary-element\\">arbitrary info text</span><p class=\\"form-error\\">This field is required.</p>
+                                        <input required=\\"\\" class=\\"has-error\\" aria-describedby=\\"error_fxcmgj\\"><p class=\\"form-error\\" role=\\"alert\\" id=\\"error_fxcmgj\\">This field is required.</p>
+                                        <input required=\\"\\" data-val-error-placement=\\".arbitrary-element\\" class=\\"has-error\\" aria-describedby=\\"error_fxcmgj\\">
+                                        <span class=\\"arbitrary-element\\">arbitrary info text</span><p class=\\"form-error\\" role=\\"alert\\" id=\\"error_fxcmgj\\">This field is required.</p>
                                     </form>"
 `;
 
 exports[`error messages with custom positioning set on field should replace an existing error message if one is already present 1`] = `
 "<form novalidate=\\"\\" class=\\"has-error\\">
-                                        <input required=\\"\\" class=\\"has-error\\"><p class=\\"form-error\\">This field is required.</p>
+                                        <input required=\\"\\" class=\\"has-error\\" aria-describedby=\\"error_fxcmgj\\"><p class=\\"form-error\\" role=\\"alert\\" id=\\"error_fxcmgj\\">This field is required.</p>
                                         <input required=\\"\\" data-val-error-placement=\\".arbitrary-element\\" class=\\"has-error\\">
                                         <span class=\\"arbitrary-element\\">arbitrary info text</span>
                                         <p class=\\"form-error\\">This field is required.</p>
