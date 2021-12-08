@@ -1,7 +1,9 @@
 import TestUtils from 'js-test-buddy';
 import FormValidation from '../../src';
 import testDefinitions from '../../src/rules';
+import stubMathRandom from '../helpers/stubMathRandom';
 
+stubMathRandom();
 
 it('an empty form should return valid', () => {
     // Arrange

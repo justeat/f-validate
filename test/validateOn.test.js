@@ -1,6 +1,9 @@
 import TestUtils from 'js-test-buddy';
 import FormValidation from '../src';
 import stubDate from './helpers/stubDate';
+import stubMathRandom from './helpers/stubMathRandom';
+
+stubMathRandom();
 
 describe('validateOn', () => {
     it('should throw error if value other than \'blur\' or \'keyup\' are passed to \'validateOn\' option', () => {

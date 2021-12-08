@@ -1,5 +1,8 @@
 import TestUtils from 'js-test-buddy';
 import FormValidation from '../src';
+import stubMathRandom from './helpers/stubMathRandom';
+
+stubMathRandom();
 
 describe('hybridMode', () => {
     it('should throw error if hyrbid mode is used with a validateOn event', () => {

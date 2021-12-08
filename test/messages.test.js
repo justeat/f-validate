@@ -2,6 +2,9 @@ import TestUtils from 'js-test-buddy';
 import {
     getInlineErrorElement, displayInlineMessage, hideMessage, getMessage
 } from '../src/messages';
+import stubMathRandom from './helpers/stubMathRandom';
+
+stubMathRandom();
 
 describe('messages', () => {
     describe('getInlineErrorElement', () => {

@@ -34,8 +34,13 @@ export const displayInlineMessage = (errorElement, customMessage, field, form) =
     const customErrorEl = getCustomErrorElement(field, form) || field;
 
     if (!errorElement) {
+        const errorSuffix = Math.random().toString(36).replace(/[^a-z]+/g, '');
+        const errorId = `error_${errorSuffix}`;
         updateElement = document.createElement('p');
         updateElement.classList.add(CONSTANTS.cssClasses.formError);
+        updateElement.setAttribute('role', 'alert');
+        updateElement.setAttribute('id', errorId);
+        field.setAttribute('aria-describedby', errorId);
         field.parentNode.insertBefore(updateElement, customErrorEl.nextSibling);
     }
 

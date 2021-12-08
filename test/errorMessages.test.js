@@ -1,5 +1,8 @@
 import TestUtils from 'js-test-buddy';
 import FormValidation from '../src/index';
+import stubMathRandom from './helpers/stubMathRandom';
+
+stubMathRandom();
 
 describe('error messages', () => {
     describe('by default', () => {

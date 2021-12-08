@@ -1,5 +1,8 @@
 import TestUtils from 'js-test-buddy';
 import FormValidation, { defaultOptions } from '../src';
+import stubMathRandom from './helpers/stubMathRandom';
+
+stubMathRandom();
 
 describe('module', () => {
     it('it is a function', () => {

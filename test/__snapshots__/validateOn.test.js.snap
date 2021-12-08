@@ -15,7 +15,7 @@ exports[`validateOn blur should not validate if field is empty and not required 
 
 exports[`validateOn blur should set form state to invalid, as first select has been touched and no option selected 1`] = `
 "<form novalidate=\\"\\" class=\\"has-error\\">
-                                <div data-val-group=\\"\\" data-val-dateinfuture=\\"\\" class=\\"has-error\\">
+                                <div data-val-group=\\"\\" data-val-dateinfuture=\\"\\" class=\\"has-error\\" aria-describedby=\\"error_fxcmgj\\">
                                      <select data-val-dateinfuture-type=\\"year\\" data-touched=\\"true\\">
                                         <option value=\\"\\"></option>
                                     </select>
@@ -23,13 +23,13 @@ exports[`validateOn blur should set form state to invalid, as first select has b
                                         <option value=\\"\\"></option>
                                         <option value=\\"01\\" selected=\\"\\"></option>
                                     </select>
-                                </div><p class=\\"form-error\\">This date must be in the future.</p>
+                                </div><p class=\\"form-error\\" role=\\"alert\\" id=\\"error_fxcmgj\\">This date must be in the future.</p>
                             </form>"
 `;
 
 exports[`validateOn blur should set form state to invalid, as second select has been touched and no value selected 1`] = `
 "<form novalidate=\\"\\" class=\\"has-error\\">
-                                <div data-val-group=\\"\\" data-val-dateinfuture=\\"\\" class=\\"has-error\\">
+                                <div data-val-group=\\"\\" data-val-dateinfuture=\\"\\" class=\\"has-error\\" aria-describedby=\\"error_fxcmgj\\">
                                      <select data-val-dateinfuture-type=\\"year\\" data-touched=\\"true\\">
                                         <option value=\\"\\"></option>
                                         <option value=\\"2018\\"></option>
@@ -39,7 +39,7 @@ exports[`validateOn blur should set form state to invalid, as second select has 
                                     <select data-val-dateinfuture-type=\\"month\\" data-touched=\\"true\\">
                                         <option value=\\"\\"></option>
                                     </select>
-                                </div><p class=\\"form-error\\">This date must be in the future.</p>
+                                </div><p class=\\"form-error\\" role=\\"alert\\" id=\\"error_fxcmgj\\">This date must be in the future.</p>
                             </form>"
 `;
 
@@ -75,7 +75,7 @@ exports[`validateOn blur should set form state to valid, as second select has no
 
 exports[`validateOn blur should validate if field is empty 1`] = `
 "<form novalidate=\\"\\" class=\\"has-error\\">
-                                        <input required=\\"\\" class=\\"has-error\\"><p class=\\"form-error\\">This field is required.</p>
+                                        <input required=\\"\\" class=\\"has-error\\" aria-describedby=\\"error_fxcmgj\\"><p class=\\"form-error\\" role=\\"alert\\" id=\\"error_fxcmgj\\">This field is required.</p>
                                     </form>"
 `;
 
@@ -93,7 +93,7 @@ exports[`validateOn keyup should not validate if field is empty and not required
 
 exports[`validateOn keyup should validate if field is empty 1`] = `
 "<form novalidate=\\"\\" class=\\"has-error\\">
-                                        <input required=\\"\\" class=\\"has-error\\"><p class=\\"form-error\\">This field is required.</p>
+                                        <input required=\\"\\" class=\\"has-error\\" aria-describedby=\\"error_fxcmgj\\"><p class=\\"form-error\\" role=\\"alert\\" id=\\"error_fxcmgj\\">This field is required.</p>
                                     </form>"
 `;
 
